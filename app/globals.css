@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+@font-face {
+  font-family: "Funnel Sans", sans-serif;
+  src: "https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap";
+  font-optical-sizing: auto;
+  font-weight: 300 800;
+  font-style: normal;
+}
+
+@theme inline {
+  --font-funnel-sans: "Funnel Sans", sans-serif;
+}
+
