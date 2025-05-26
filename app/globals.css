@@ -28,15 +28,11 @@
   height: 3px;
   border-radius: 3px;
   width: 0;
-  background: linear-gradient(to right, rgb(0, 238, 255), rgb(13, 0, 255));
+  background: linear-gradient(to right, rgb(0, 238, 255), rgb(63, 153, 255));
   transition: all 0.3s ease;
 }
 
 .on-hover-underline:hover:after {
   box-shadow: 0 0 100px #fff;
   width: 80%;
-}
-
-.shadow-effect {
-  box-shadow: rgb(255, 255, 255) 0px 10px 20px -12px inset, rgba(255, 255, 255, 0.3) 0px 18px 36px -18px inset;
 }
