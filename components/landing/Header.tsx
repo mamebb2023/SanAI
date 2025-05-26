@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <div
       className={`fixed top-0 left-0 z-50 px-20 w-full flex items-center border-b border-gray-500/30 transition-all duration-500 ${
-        y > 100 ? "h-12" : "h-[70px]"
+        y > 100 ? "h-12 backdrop-blur-sm" : "h-[70px]"
       }`}
     >
       <div className="flex-between flex-1">

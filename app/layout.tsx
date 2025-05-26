@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.className} bg-[#000111] text-white antialiased`}>
+      <body className={`${font.className} bg-[#00032b] text-white antialiased`}>
         <ReactLenis root>
           {children}
           <Toaster />
