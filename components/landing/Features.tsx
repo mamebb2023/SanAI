@@ -1,163 +1,192 @@
 "use client";
 
-import React from "react";
-import Tag from "../shared/Tag";
+import React, { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import { ScrollParallax } from "react-just-parallax";
+import { PiFlowerLotus } from "react-icons/pi";
 import { MdHealthAndSafety, MdAccessTime } from "react-icons/md";
-import { FaUserShield, FaHeartbeat, FaRobot } from "react-icons/fa";
+import { FaUserShield, FaRobot, FaHeartbeat } from "react-icons/fa";
+import { ScrollTrigger } from "gsap/all";
+import { gsap } from "gsap";
+import Tag from "../shared/Tag";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Features = () => {
-  const containerRef = React.useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, {
     once: true,
     amount: 0.5,
   });
 
-  const features = {
-    small: [
-      {
-        title: "Personalized Insights",
-        description:
-          "Receive AI-driven health advice tailored to your unique profile and lifestyle.",
-        icon: <MdHealthAndSafety size={40} className="text-blue-400" />,
+  const features = [
+    {
+      title: "SanAI Health Insights",
+      description:
+        "Get personalized health recommendations powered by SanAI's advanced algorithms.",
+      icon: <MdHealthAndSafety className="text-blue-400" size={30} />,
+      color: "#0044ff",
+    },
+    {
+      title: "24/7 SanAI Access",
+      description:
+        "Your SanAI companion is always available whenever you need health guidance.",
+      icon: <MdAccessTime className="text-cyan-400" size={30} />,
+      color: "#00c8ff",
+    },
+    {
+      title: "Smart Wellness",
+      description:
+        "SanAI proactively suggests habits to improve your wellbeing.",
+      icon: <FaHeartbeat className="text-emerald-400" size={26} />,
+      color: "#00ffb7",
+    },
+    {
+      title: "Privacy Protection",
+      description:
+        "SanAI keeps your health data completely confidential and secure.",
+      icon: <FaUserShield className="text-violet-400" size={26} />,
+      color: "#5d00ff",
+    },
+    {
+      title: "AI-Powered Engine",
+      description: "SanAI's advanced models provide precise health support.",
+      icon: <FaRobot className="text-[#ffb700]" size={26} />,
+      color: "#ffb700",
+    },
+  ];
+
+  useEffect(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom center",
+        pin: true,
       },
-      {
-        title: "24/7 Accessibility",
-        description:
-          "Your health companion, always available — anytime, anywhere.",
-        icon: <MdAccessTime size={40} className="text-blue-400" />,
+    });
+
+    tl.to(contentRef.current, {
+      opacity: 1,
+      duration: 1,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom center",
+        toggleActions: "play none none reverse",
       },
-      {
-        title: "Smart Wellness Guidance",
-        description:
-          "Track and improve your habits with proactive suggestions.",
-        icon: <FaHeartbeat size={30} className="text-cyan-400" />,
+    });
+
+    tl.to(contentRef.current, {
+      clipPath: "circle(100% at 50% 50%)",
+      duration: 1.5,
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top top",
+        end: "bottom center",
+        scrub: true,
+        toggleActions: "play none none reverse",
       },
-      {
-        title: "Privacy-First Design",
-        description:
-          "Your data, your control. We ensure complete confidentiality.",
-        icon: <FaUserShield size={30} className="text-cyan-400" />,
-      },
-      {
-        title: "AI-Powered Engine",
-        description: "Built on advanced models for precision health support.",
-        icon: <FaRobot size={30} className="text-cyan-400" />,
-        comingSoon: true,
-      },
-    ],
-  };
+    });
+  }, []);
 
   return (
-    <div id="features" ref={containerRef} className="relative">
-      <ScrollParallax isAbsolutelyPositioned strength={0.3}>
-        <div className="absolute top-1/3 right-10 -translate-y-1/2 size-80 flex-center">
-          <div className="absolute size-30 rounded-full bg-blue-500/80 blur-3xl" />
+    <div ref={containerRef} id="features" className="relative min-h-screen">
+      <div className="absolute h-screen w-full flex-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+        >
+          <PiFlowerLotus className="text-[500px] text-white" />
+        </motion.div>
 
-          <div
-            className="absolute size-80 rounded-full"
-            style={{
-              background:
-                "url('/circle-dots.webp') no-repeat center center/cover",
-            }}
-          />
-        </div>
-      </ScrollParallax>
-      <ScrollParallax isAbsolutelyPositioned>
-        <div className="absolute top-1/2 left-10 size-80 flex-center">
-          <div className="absolute size-30 rounded-full bg-cyan-500/80 blur-3xl" />
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 1 }}
+          className="absolute top-1/3 right-10 size-80 rounded-full bg-gradient-to-br from-blue-500/60 to-cyan-500/60 blur-3xl"
+        />
 
-          <div
-            className="absolute size-80 rounded-full"
-            style={{
-              background:
-                "url('/circle-dots.webp') no-repeat center center/contain",
-            }}
-          />
-        </div>
-      </ScrollParallax>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 1 }}
+          className="absolute top-1/2 left-10 size-80 rounded-full bg-gradient-to-br from-cyan-500/60 to-blue-500/60 blur-3xl"
+        />
+      </div>
 
-      <div className="relative flex items-center gap-5 flex-col">
-        <Tag decore>Features</Tag>
+      <div
+        ref={contentRef}
+        className="relative opacity-0 bg-gradient-to-br from-blue-950 to-cyan-950 min-h-screen pt-14"
+        style={{
+          clipPath: "circle(3% at 50% 50%)",
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 1 }}
+          className="absolute top-1/3 left-10 size-80 rounded-full bg-gradient-to-br from-blue-500/30 to-cyan-500/30 blur-3xl"
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 1 }}
+          className="absolute bottom-1/3 right-10 size-80 rounded-full bg-gradient-to-br from-cyan-500/30 to-blue-500/30 blur-3xl"
+        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <Tag decore>Why Choose SanAI</Tag>
+        </motion.div>
 
-        <div className="flex flex-col gap-2">
-          <div className="overflow-hidden">
-            <motion.p
-              initial={{ y: "100%" }}
-              animate={{ y: isInView ? 0 : "100%" }}
-              transition={{ duration: 1 }}
-              className="text-7xl text-center"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-center max-w-4xl mx-auto mt-6"
+        >
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-cyan-200 leading-tight">
+            Your AI Health Companion
+          </h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 0.8 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="md:text-xl text-cyan-100 mt-6"
+          >
+            SanAI combines cutting-edge technology with personalized care
+          </motion.p>
+        </motion.div>
+
+        <div className="relative flex-center gap-3 flex-wrap max-w-5xl mx-auto mt-10">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="p-4 h-40 w-80 rounded-xl border flex flex-wrap gap-3"
+              style={{
+                borderColor: `${feature.color}30`,
+                background: `${feature.color}10`,
+              }}
             >
-              Empowering your health
-            </motion.p>
-          </div>
-          <div className="overflow-hidden">
-            <motion.p
-              initial={{ y: "100%" }}
-              animate={{ y: isInView ? 0 : "100%" }}
-              transition={{ duration: 1, delay: 0.2 }} // Added a slight delay
-              className="text-7xl text-center"
-            >
-              with SanAI
-            </motion.p>
-          </div>
-        </div>
-
-        <div className="text-gray-500">
-          {"SanAI is a cutting-edge AI solution designed to deliver personalized, reliable, and accessible health insights — anytime, anywhere.<br />Our mission is to empower individuals with tools that support smarter decisions and proactive wellness."
-            .split("<br />")
-            .map((line, index) => (
-              <p
-                key={index}
-                className="overflow-hidden flex-center gap-1 text-center"
+              <div
+                className="size-12 border rounded-xl flex-center"
+                style={{ borderColor: `${feature.color}10` }}
               >
-                {line.split(" ").map((word, wordIndex) => (
-                  <motion.span
-                    key={wordIndex}
-                    className=""
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: isInView ? 1 : 0 }}
-                    transition={{
-                      duration: 0.5,
-                      delay: 0.5 + index * 0.2 + wordIndex * 0.05, // Adjusted delay for a smoother staggered effect
-                    }}
-                  >
-                    {word}
-                  </motion.span>
-                ))}
-              </p>
-            ))}
+                {feature.icon}
+              </div>
+              <div className="flex flex-1 flex-col gap-1">
+                {feature.title}
+                <span className="text-sm text-gray-400">
+                  {feature.description}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
-
-        <div className="relative flex flex-col gap-3 my-5 md:my-10 w-[90%] md:w-[80%] lg:w-[70%]">
-          <div className="absolute bottom-1/3 left-1/2 size-60 rounded-full bg-blue-800 blur-[150px]" />
-          <div className="relative flex justify-center gap-3 flex-wrap">
-            {features.small.map((feature, index) => (
-              <motion.div // Apply motion to the feature card
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
-                transition={{
-                  duration: 0.7,
-                  delay: 0.6 + index * 0.1, // Staggered delay for each card
-                }}
-                className="size-[250px] flex gap-2 flex-col rounded-xl bg-gradient-to-bl from-cyan-950 via-blue-950 to-transparent p-5"
-              >
-                <div className="flex-1 flex items-center justify-center">
-                  {feature.icon}
-                </div>
-
-                <div className="space-y-2">
-                  <p className="">{feature.title}</p>
-                  <p className="text-sm text-gray-500">{feature.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        <div></div>
       </div>
     </div>
   );

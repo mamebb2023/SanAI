@@ -20,14 +20,6 @@ const Tag = ({
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="relative flex-center gap-2 my-5">
-        {/* Decorative blurred gradient bubble (optional) */}
-        {/* 
-        {decore && (
-          <div className="absolute blur-2xl right-10 -translate-y-5 size-20 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500" />
-        )} 
-        */}
-
-        {/* Left line decoration */}
         {decore && (
           <Image
             src="/line-decore.png"

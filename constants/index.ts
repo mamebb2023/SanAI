@@ -13,7 +13,7 @@ export const links = [
   },
   {
     href: "/#about",
-    label: "About",
+    label: "Our Mission",
   },
   // {
   //   href: "/#faq",
