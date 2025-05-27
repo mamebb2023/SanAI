@@ -66,13 +66,13 @@ const Features = () => {
       },
     });
 
-    tl.to(contentRef.current, {
+    gsap.to(contentRef.current, {
       opacity: 1,
-      duration: 1,
+      duration: 0.5,
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top top",
-        end: "bottom center",
+        end: "bottom top",
         toggleActions: "play none none reverse",
       },
     });
@@ -116,9 +116,11 @@ const Features = () => {
         />
       </div>
 
-      <div
+      <motion.div
+        // initial={{ opacity: 0 }}
+        // animate={isInView ? { opacity: 1 } : {}}
         ref={contentRef}
-        className="relative opacity-0 bg-gradient-to-br from-blue-950 to-cyan-950 min-h-screen pt-14"
+        className="relative opacity-0 transition-all bg-gradient-to-br from-blue-950 to-cyan-950 min-h-screen pt-14"
         style={{
           clipPath: "circle(3% at 50% 50%)",
         }}
@@ -162,11 +164,11 @@ const Features = () => {
           </motion.p>
         </motion.div>
 
-        <div className="relative flex-center gap-3 flex-wrap max-w-5xl mx-auto mt-10">
+        <div className="relative flex justify-center gap-3 flex-wrap max-w-5xl mx-auto mt-10">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="p-4 h-40 w-80 rounded-xl border flex flex-wrap gap-3"
+              className="p-4 w-80 rounded-xl border flex flex-wrap gap-3"
               style={{
                 borderColor: `${feature.color}30`,
                 background: `${feature.color}10`,
@@ -187,7 +189,7 @@ const Features = () => {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
