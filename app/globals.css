@@ -57,27 +57,39 @@
   transition: all 0.3s ease;
 }
 
-.slow-spin-right {
-  animation: slow-spin-right 15s linear infinite;
+.filter-blue-invert {
+ filter: hue-rotate(180deg) brightness(10) contrast(10) saturate(10);
 }
 
-@keyframes slow-spin-right {
-  from {
+.slow-spin {
+  animation: slow-spin 10s linear infinite;
+}
+
+@keyframes slow-spin {
+  0% {
     transform: rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg);
   }
 }
 
-.slow-spin-left {
-  animation: slow-spin-left 15s linear infinite;
+.rotate-y-animation-1 {
+  animation: rotateY 15s linear reverse infinite;
 }
-@keyframes slow-spin-left {
-  from {
-    transform: rotate(0deg);
+
+.rotate-y-animation-2 {
+  animation: rotateY 60s linear infinite;
+}
+
+@keyframes rotateY {
+  0% {
+    transform: rotateX(0deg);
   }
-  to {
-    transform: rotate(-360deg);
+  50% {
+    transform: rotateX(180deg);
+  }
+  100% {
+    transform: rotateX(360deg);
   }
 }

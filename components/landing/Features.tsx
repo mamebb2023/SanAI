@@ -120,7 +120,7 @@ const Features = () => {
         // initial={{ opacity: 0 }}
         // animate={isInView ? { opacity: 1 } : {}}
         ref={contentRef}
-        className="relative transition-all bg-gradient-to-br from-blue-950 to-cyan-950 min-h-screen pt-14"
+        className="relative transition-all min-h-screen pt-14"
         style={
           {
             // clipPath: "circle(3% at 50% 50%)",
