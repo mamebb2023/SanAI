@@ -7,13 +7,13 @@ import Hero from "@/components/landing/Hero";
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Header />
       <Hero />
       <Features />
       <About />
       <CTA />
       <Footer />
-    </>
+    </div>
   );
 }

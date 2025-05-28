@@ -56,43 +56,43 @@ const Features = () => {
     },
   ];
 
-  useEffect(() => {
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom center",
-        pin: true,
-      },
-    });
+  // useEffect(() => {
+  //   const tl = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: containerRef.current,
+  //       start: "top top",
+  //       end: "bottom center",
+  //       pin: true,
+  //     },
+  //   });
 
-    gsap.to(contentRef.current, {
-      opacity: 1,
-      duration: 0.5,
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom top",
-        toggleActions: "play none none reverse",
-      },
-    });
+  //   gsap.to(contentRef.current, {
+  //     opacity: 1,
+  //     duration: 0.5,
+  //     scrollTrigger: {
+  //       trigger: containerRef.current,
+  //       start: "top top",
+  //       end: "bottom top",
+  //       toggleActions: "play none none reverse",
+  //     },
+  //   });
 
-    tl.to(contentRef.current, {
-      clipPath: "circle(100% at 50% 50%)",
-      duration: 1.5,
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top top",
-        end: "bottom center",
-        scrub: true,
-        toggleActions: "play none none reverse",
-      },
-    });
-  }, []);
+  //   tl.to(contentRef.current, {
+  //     clipPath: "circle(100% at 50% 50%)",
+  //     duration: 1.5,
+  //     scrollTrigger: {
+  //       trigger: containerRef.current,
+  //       start: "top top",
+  //       end: "bottom center",
+  //       scrub: true,
+  //       toggleActions: "play none none reverse",
+  //     },
+  //   });
+  // }, []);
 
   return (
     <div ref={containerRef} id="features" className="relative min-h-screen">
-      <div className="absolute h-screen w-full flex-center">
+      {/* <div className="absolute h-screen w-full flex-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
@@ -114,16 +114,18 @@ const Features = () => {
           transition={{ delay: 0.5, duration: 1 }}
           className="absolute top-1/2 left-10 size-80 rounded-full bg-gradient-to-br from-cyan-500/60 to-blue-500/60 blur-3xl"
         />
-      </div>
+      </div> */}
 
       <motion.div
         // initial={{ opacity: 0 }}
         // animate={isInView ? { opacity: 1 } : {}}
         ref={contentRef}
-        className="relative opacity-0 transition-all bg-gradient-to-br from-blue-950 to-cyan-950 min-h-screen pt-14"
-        style={{
-          clipPath: "circle(3% at 50% 50%)",
-        }}
+        className="relative transition-all bg-gradient-to-br from-blue-950 to-cyan-950 min-h-screen pt-14"
+        style={
+          {
+            // clipPath: "circle(3% at 50% 50%)",
+          }
+        }
       >
         <motion.div
           initial={{ opacity: 0, y: 50 }}
