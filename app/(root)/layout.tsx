@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  return <div>{children}</div>;
+  return <div className="">{children}</div>;
 };
 
 export default Layout;

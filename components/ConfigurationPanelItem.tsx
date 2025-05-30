@@ -15,13 +15,16 @@ export const ConfigurationPanelItem: React.FC<ConfigurationPanelItemProps> = ({
   source,
 }) => {
   return (
-    <div className="w-full text-gray-300 py-4 border-b border-b-gray-800 relative">
-      <div className="flex flex-row justify-between items-center px-4 text-xs uppercase tracking-wider">
-        <h3>{title}</h3>
+    <div className="size-full text-gray-300 relative">
+      <div className="absolute top-0 left-0 text-xs text-gray-500 leading-normal size-full">
+        {children}
+      </div>
+      <div className="absolute p-1 w-full flex flex-row justify-between items-center text-xs uppercase tracking-wider">
         {source && (
-          <span className="flex flex-row gap-2">
+          <span className="flex w-full flex-row gap-2 justify-between items-center p-1 bg-gray-900/50 rounded-md">
+            <h3>{title}</h3>
             <TrackToggle
-              className="px-2 py-1 bg-gray-900 text-gray-300 border border-gray-800 rounded-sm hover:bg-gray-800"
+              className="border border-white/30 rounded-sm hover:bg-white/20 p-1 transition-all"
               source={source as any}
             />
             {source === Track.Source.Camera && (
@@ -32,9 +35,6 @@ export const ConfigurationPanelItem: React.FC<ConfigurationPanelItemProps> = ({
             )}
           </span>
         )}
-      </div>
-      <div className="px-4 py-2 text-xs text-gray-500 leading-normal">
-        {children}
       </div>
     </div>
   );

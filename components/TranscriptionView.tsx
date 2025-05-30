@@ -1,5 +1,7 @@
 import useCombinedTranscriptions from "@/hooks/useCombinedTranscriptions";
 import * as React from "react";
+import { FaInfoCircle } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function TranscriptionView() {
   const combinedTranscriptions = useCombinedTranscriptions();
@@ -16,15 +18,28 @@ export default function TranscriptionView() {
 
   if (combinedTranscriptions.length <= 0) {
     return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-gray-500">Talk to Dr. San to view the live chat.</p>
-      </div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="flex-center flex-col gap-2 h-full text-gray-500"
+      >
+        <FaInfoCircle />
+        <p className="max-w-[150px] text-center">
+          Talk to Dr. San to view the live chat.
+        </p>
+      </motion.div>
     );
   }
 
   return (
-    <div className="relative">
-      <div ref={containerRef} className="flex flex-col gap-2">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="relative"
+    >
+      <div ref={containerRef} className="flex flex-col items-end gap-2">
         {combinedTranscriptions.map((segment) => (
           <div
             id={segment.id}
@@ -39,6 +54,6 @@ export default function TranscriptionView() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }
