@@ -21,9 +21,9 @@ const Footer = () => {
   ];
 
   const quickLinks = [
-    { label: "About", href: "/about" },
-    { label: "Features", href: "/features" },
-    { label: "Meet Doctor", href: "/doctor" },
+    { label: "About", href: "/#about" },
+    { label: "Features", href: "/#features" },
+    { label: "Meet Doctor", href: "/consultation" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
   ];
@@ -49,19 +49,19 @@ const Footer = () => {
   };
 
   return (
-    <div className="relative h-[60vh] overflow-hidden mt-10 border-t border-white/10 p-7 md:p-12 lg:p-20">
+    <div className="relative overflow-hidden mt-10 border-t border-white/10 p-7 md:p-12 lg:p-20">
       {/* Background elements */}
       <div className="absolute right-0 h-full flex items-center">
         <PiFlowerLotus className="text-[500px] text-white/10" />
       </div>
-      <div className="absolute w-full left-1/2 -translate-x-1/2 -bottom-1/2 -translate-y-1/2 h-60 bg-gradient-to-r from-blue-500 via-blue-500 to-cyan-500 blur-3xl rounded-[50%]" />
+      <div className="absolute w-full left-1/2 -translate-x-1/2 -bottom-1/2 -translate-y-5 lg:-translate-y-1/4 h-60 bg-gradient-to-r from-blue-500 via-blue-500 to-cyan-500 blur-3xl rounded-[50%]" />
 
       <motion.div
         initial="hidden"
         whileInView="visible"
         variants={containerVariants}
         viewport={{ once: true }}
-        className="relative flex flex-col md:flex-row gap-10 ml-0 md:ml-10 lg:ml-20"
+        className="relative flex flex-col md:flex-row gap-7 ml-0 md:ml-10 lg:ml-20"
       >
         {/* Brand Section */}
         <motion.div
@@ -97,7 +97,7 @@ const Footer = () => {
         {/* Quick Links */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col gap-3 flex-grow"
+          className="flex flex-col gap-3 flex-grow mb-6"
         >
           <motion.h3
             variants={itemVariants}
@@ -125,7 +125,7 @@ const Footer = () => {
         {/* Newsletter (Optional) */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col gap-3 max-w-xs flex-grow"
+          className="hidden lg:flex flex-col gap-3 max-w-xs flex-grow"
         >
           <motion.h3
             variants={itemVariants}
@@ -140,15 +140,18 @@ const Footer = () => {
             <input
               type="email"
               placeholder="Your email"
-              className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
+              className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full cursor-not-allowed"
+              disabled={true}
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity"
+              className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity cursor-not-allowed"
+              disabled={true}
             >
               Subscribe
             </button>
           </motion.form>
+          <p className="text-gray-500 text-sm">comming soon...</p>
         </motion.div>
       </motion.div>
 
@@ -158,7 +161,7 @@ const Footer = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
         viewport={{ once: true }}
-        className="absolute bottom-5 left-1/2 -translate-x-1/2 text-xs text-gray-500 text-center w-full"
+        className="absolute bottom-5 left-1/2 -translate-x-1/2 text-xs text-center w-full"
       >
         © {new Date().getFullYear()} SanAI. All rights reserved.
       </motion.div>

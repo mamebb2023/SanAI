@@ -5,48 +5,28 @@ import { motion } from "framer-motion";
 import Tag from "../shared/Tag";
 import Link from "next/link";
 import Button from "../shared/Button";
-import { MouseParallax } from "react-just-parallax";
+import HeroDecorations from "@/components/decorations/HeroDecorations";
+import HeroImageDecorations from "@/components/decorations/HeroImageDecorations";
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen flex-center pt-20 md:pt-40 px-5 md:px-20 lg:px-32 overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 size-full flex-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{
-            duration: 1.5,
-            delay: 0.3,
-            ease: "easeOut",
-          }}
-          className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-xl h-[500px] w-[500px] bg-gradient-to-br from-blue-500 to-cyan-500 rounded-b-full"
-        />
+    <div className="relative flex-center pt-20 md:pt-40 px-5 md:px-20 lg:px-32">
+      <div
+        className="hidden md:block z-20 absolute bottom-0 w-screen h-[80vh] lg:h-screen"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 0%, transparent 40%, #00032b 60%)",
+        }}
+      />
 
-        <MouseParallax isAbsolutelyPositioned strength={0.1}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="absolute top-1/3 left-10 -translate-y-1/2 size-80 flex-center"
-          >
-            <div className="absolute size-30 rounded-full bg-blue-500 blur-3xl" />
-            <div className="absolute size-80 rounded-full bg-[url('/circle-dots.webp')] bg-center bg-cover" />
-          </motion.div>
-        </MouseParallax>
-
-        <MouseParallax isAbsolutelyPositioned strength={-0.1}>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.7 }}
-            className="absolute top-1/2 right-10 size-80 flex-center"
-          >
-            <div className="absolute size-30 rounded-full bg-cyan-500 blur-3xl" />
-            <div className="absolute size-80 rounded-full bg-[url('/circle-dots.webp')] bg-center bg-contain" />
-          </motion.div>
-        </MouseParallax>
-      </div>
+      <div
+        className="md:hidden z-20 absolute bottom-0 w-screen h-screen"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 0%, transparent 70%, #00032b 85%)",
+        }}
+      />
+      <HeroDecorations />
 
       {/* Main Content */}
       <div className="relative flex-1 flex-center flex-col gap-5 z-10">
@@ -124,9 +104,10 @@ const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="relative w-full max-w-4xl aspect-video mt-10 md:mt-16"
+          className="relative w-full max-w-5xl aspect-video my-10 md:my-16 p-8"
         >
-          <div className="absolute inset-0 bg-[url('/world.png')] bg-contain bg-center bg-no-repeat" />
+          <HeroImageDecorations />
+          <div className="p-6 relative size-full border-x border-t bg-white/10 backdrop-blur-sm inset-0 bg-[url('/world.png')] bg-contain bg-center bg-no-repeat object-center object-contain rounded-2xl" />
         </motion.div>
       </div>
     </div>

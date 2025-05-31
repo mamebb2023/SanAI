@@ -6,12 +6,13 @@ import { motion, useInView } from "framer-motion";
 import { ScrollParallax } from "react-just-parallax";
 import { PiFlowerLotus } from "react-icons/pi";
 import { FaLeaf, FaHeartbeat, FaBrain } from "react-icons/fa";
+import SimpleDecore from "../decorations/SimpleDecore";
 
 const AboutUs = () => {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const isInView = useInView(containerRef, {
     once: true,
-    amount: 0.5,
+    amount: 0.4,
   });
 
   const coreValues = [
@@ -19,16 +20,19 @@ const AboutUs = () => {
       icon: <FaLeaf className="text-emerald-400" size={24} />,
       title: "Holistic Approach",
       description: "Treating mind and body as interconnected systems",
+      color: "#00ff6e",
     },
     {
       icon: <FaHeartbeat className="text-rose-400" size={24} />,
       title: "Preventive Care",
       description: "Focusing on wellness before illness occurs",
+      color: "#ff4632",
     },
     {
       icon: <FaBrain className="text-indigo-400" size={24} />,
       title: "Continuous Learning",
       description: "Evolving with the latest medical research",
+      color: "#b049ff",
     },
   ];
 
@@ -36,13 +40,15 @@ const AboutUs = () => {
     <section
       id="about"
       ref={containerRef}
-      className="relative min-h-screen w-full overflow-hidden flex items-center justify-center py-20 px-4"
+      className="relative w-full flex-center py-20 px-8"
     >
+      <SimpleDecore isInView={isInView} />
+
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 0.1 } : {}}
+          animate={isInView ? { opacity: 0 } : {}}
           transition={{ duration: 1.5 }}
           className="absolute -bottom-20 -left-20"
         >
@@ -109,14 +115,18 @@ const AboutUs = () => {
               your unique needs.
             </p>
 
-            <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-4">
               {coreValues.map((value, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                  className="bg-white/5 p-4 rounded-xl border border-white/10 hover:border-cyan-400/30 transition-colors"
+                  className="mx-auto p-4 rounded-xl border border-white/10 hover:border-cyan-400/30 transition-colors backdrop-blur-sm"
+                  style={{
+                    border: `1px solid ${value.color}50`,
+                    background: `linear-gradient(to bottom right, ${value.color}05, ${value.color}30, ${value.color}05`,
+                  }}
                 >
                   <div className="flex items-center gap-3 mb-3">
                     <div className="p-2 rounded-lg bg-white/5">
@@ -137,8 +147,10 @@ const AboutUs = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="relative h-full min-h-[400px] rounded-2xl overflow-hidden border border-cyan-500/20 bg-gradient-to-br from-blue-900/30 to-cyan-900/30 backdrop-blur-sm"
+            className="relative h-full min-h-[400px] rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-blue-900/30 to-cyan-900/30 backdrop-blur-sm"
           >
+            <div className="absolute inset-0 border-2 border-cyan-500/80 blur-md" />
+
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="relative w-64 h-64">
                 <motion.div
@@ -164,6 +176,7 @@ const AboutUs = () => {
                   className="absolute inset-4 rounded-full border-l-2 border-r-2 border-blue-400/30"
                 />
                 <div className="absolute inset-8 flex items-center justify-center rounded-full bg-cyan-900/20 backdrop-blur-sm">
+                  <div className="absolute size-10 bg-cyan-500 blur-xl" />
                   <PiFlowerLotus className="text-6xl text-cyan-400/80" />
                 </div>
               </div>

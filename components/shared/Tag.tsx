@@ -32,15 +32,19 @@ const Tag = ({
 
         {/* Core tag content */}
         <div
-          className={`relative flex-center px-4 py-2 bg-blue-400/30 rounded-xl border-x border-t overflow-hidden ${
+          className={`relative flex-center px-4 py-2 bg-blue-400/30 backdrop-blur-sm rounded-xl border-x border-t overflow-hidden ${
             decore ? "border-white/50" : "border-white/30"
           }`}
         >
           {/* Inner glow */}
           <div
-            className={`absolute top-0 -translate-y-3/4 size-[50px] bg-white rounded-full  ${
-              decore ? "blur-[20px] -translate-x-1/2" : "blur-[35px]"
-            }`}
+            className={`absolute top-0 -translate-y-3/4 size-[50px] bg-white rounded-full blur-[35px]`}
+          />
+          <div
+            className={`absolute right-0 size-[50px] bg-cyan-500 rounded-full blur-[35px]`}
+          />
+          <div
+            className={`absolute left-0 size-[50px] bg-blue-500 rounded-full blur-[35px]`}
           />
 
           {/* Tag icon + content */}

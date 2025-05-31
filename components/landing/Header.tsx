@@ -48,7 +48,7 @@ const Header = () => {
             transition: { duration: 0.7 },
           }}
           exit={{ y: "-100%", opacity: 0 }}
-          className={`fixed top-2 left-0 z-50 w-full flex-center`}
+          className={`fixed top-2 left-0 z-50 w-full flex-center px-3 md:px-7 lg:px-10`}
         >
           <div className="flex-between flex-1 max-w-5xl backdrop-blur-sm mx-auto bg-white/10 border border-white/20 rounded-full py-1 px-4 sm:px-8 md:px-20">
             <Link href="/" className="flex items-center gap-2">
@@ -69,7 +69,7 @@ const Header = () => {
             </nav>
 
             <Link href="/consultation?utm_source=header">
-              <Button className="scale-90 hover:scale-95">Get Started</Button>
+              <Button className="scale-90 hover:scale-95">Try Now</Button>
             </Link>
           </div>
         </motion.div>

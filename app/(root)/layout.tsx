@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  return <div className="">{children}</div>;
+  return <div className="repeating-square-background">{children}</div>;
 };
 
 export default Layout;
