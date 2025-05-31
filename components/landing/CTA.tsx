@@ -12,7 +12,7 @@ const CTA = () => {
   const isInView = useInView(ref, { once: true, amount: 0.4 });
 
   return (
-    <div ref={ref} className="relative h-[110vh] w-full flex-center">
+    <div ref={ref} className="relative h-[110vh] w-full flex-center overflow-x-hidden">
       <SimpleDecore isInView={isInView} />
       {/* Animated background elements */}
       <motion.div

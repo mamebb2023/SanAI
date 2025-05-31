@@ -7,6 +7,7 @@ import TranscriptionView from "@/components/TranscriptionView";
 import {
   BarVisualizer,
   DisconnectButton,
+  RoomAudioRenderer,
   RoomContext,
   VideoTrack,
   useTracks,
@@ -85,7 +86,7 @@ export default function Page() {
       <div className="relative h-screen flex">
         <DashboardDecore />
 
-        <div className="bg-white/20 w-[60px] h-full flex flex-col justify-between items-center py-4">
+        <div className="bg-white/20 backdrop-blur-sm w-[60px] h-full flex flex-col justify-between items-center py-4">
           <Logo />
           <div className="text-xl">
             <Link
@@ -129,7 +130,9 @@ function MiddleSection(props: { onConnectButtonClicked: () => void }) {
             className={`absolute size-28 rounded-full bg-white blur-2xl ${
               agentState === "connecting" ? "animate-pulse" : ""
             }`}
-          ></motion.div>
+          >
+            <RoomAudioRenderer />
+          </motion.div>
         ) : (
           <div className="absolute top-2">
             <Tip />
@@ -202,7 +205,7 @@ function MiddleSection(props: { onConnectButtonClicked: () => void }) {
 
 function LeftSection() {
   return (
-    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 rounded-xl p-4 md:flex flex-wrap gap-2 flex-col">
+    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 backdrop-blur-sm rounded-xl p-4 md:flex flex-wrap gap-2 flex-col">
       <p>Text Visualization</p>
       <div className="flex-1 bg-white/5 rounded-md p-2 overflow-y-auto items-end">
         <TranscriptionView />
@@ -228,7 +231,7 @@ function RightSection() {
   );
 
   return (
-    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 rounded-xl p-4 md:flex flex-col gap-2">
+    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 backdrop-blur-sm rounded-xl p-4 md:flex flex-col gap-2">
       {/* video track */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}

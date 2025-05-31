@@ -2,7 +2,7 @@ import React from "react";
 
 const HeroImageDecorations = () => {
   return (
-    <div className="absolute inset-0 size-full border-x-2 border-t-2 border-white rounded-2xl">
+    <div className="absolute inset-0 size-full border-x-2 border-t-2 border-white rounded-2xl md:overflow-y-hidden">
       <div
         className="absolute inset-0 size-full rounded-2xl blur-[20px]"
         style={{
