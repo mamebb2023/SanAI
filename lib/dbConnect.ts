@@ -3,7 +3,7 @@ import process from "process";
 
 let isConnected: boolean = false;
 
-export const connectToDatabase = async () => {
+export const dbConnect = async () => {
   mongoose.set("strictQuery", true);
 
   if (!process.env.MONGODB_URL) {
