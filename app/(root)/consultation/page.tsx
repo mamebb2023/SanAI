@@ -25,7 +25,6 @@ import {
   ConnectionState,
 } from "livekit-client";
 import { useCallback, useEffect, useState } from "react";
-import type { ConnectionDetails } from "@/app/api/connection-details/route";
 import Logo from "@/components/shared/Logo";
 import Link from "next/link";
 import { PiFlowerLotus, PiFlowerLotusDuotone } from "react-icons/pi";
@@ -35,6 +34,7 @@ import { FaInfoCircle, FaVideo } from "react-icons/fa";
 import DashboardDecore from "@/components/decorations/DashboardDecore";
 import { ConfigurationPanelItem } from "@/components/ConfigurationPanelItem";
 import { LoadingSVG } from "@/components/shared/LoadingSVG";
+import { ConnectionDetails } from "@/app/api/connection-details/route";
 
 export default function Page() {
   const [room] = useState(new Room());

@@ -1,13 +1,20 @@
 import { AccessToken, AccessTokenOptions, VideoGrant } from "livekit-server-sdk";
 import { NextResponse } from "next/server";
-import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/models/user.model";
+import { dbConnect } from "@/lib/dbConnect";
 
 const API_KEY = process.env.LIVEKIT_API_KEY;
 const API_SECRET = process.env.LIVEKIT_API_SECRET;
 const LIVEKIT_URL = process.env.LIVEKIT_URL;
 
 export const revalidate = 0;
+
+export type ConnectionDetails = {
+  serverUrl: string;
+  roomName: string;
+  participantName: string;
+  participantToken: string;
+};
 
 function getClientIP(headers: Headers): string {
   const forwarded = headers.get("x-forwarded-for");
