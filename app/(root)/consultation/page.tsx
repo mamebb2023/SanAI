@@ -10,11 +10,20 @@ import {
   RoomAudioRenderer,
   RoomContext,
   VideoTrack,
+  useConnectionState,
+  useLocalParticipant,
+  useRoomInfo,
   useTracks,
   useVoiceAssistant,
 } from "@livekit/components-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { LocalParticipant, Track, Room, RoomEvent } from "livekit-client";
+import {
+  LocalParticipant,
+  Track,
+  Room,
+  RoomEvent,
+  ConnectionState,
+} from "livekit-client";
 import { useCallback, useEffect, useState } from "react";
 import type { ConnectionDetails } from "@/app/api/connection-details/route";
 import Logo from "@/components/shared/Logo";
@@ -25,6 +34,7 @@ import toast from "react-hot-toast";
 import { FaInfoCircle, FaVideo } from "react-icons/fa";
 import DashboardDecore from "@/components/decorations/DashboardDecore";
 import { ConfigurationPanelItem } from "@/components/ConfigurationPanelItem";
+import { LoadingSVG } from "@/components/shared/LoadingSVG";
 
 export default function Page() {
   const [room] = useState(new Room());
@@ -116,9 +126,6 @@ function MiddleSection(props: { onConnectButtonClicked: () => void }) {
     <div className="relative flex-1 flex-center">
       <ConnectButtonDecore />
 
-      {/* {agentState === "connecting" && (
-        <div className="absolute size-24 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 animate-ping"></div>
-      )} */}
       <AnimatePresence>
         {agentState !== "disconnected" ? (
           <motion.div
@@ -216,6 +223,10 @@ function LeftSection() {
 
 function RightSection() {
   const tracks = useTracks();
+  const { name } = useRoomInfo();
+  const { localParticipant } = useLocalParticipant();
+  const roomState = useConnectionState();
+  const voiceAssistant = useVoiceAssistant();
 
   const localTracks = tracks.filter(
     ({ participant }) => participant instanceof LocalParticipant
@@ -295,7 +306,43 @@ function RightSection() {
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
         className="relative flex-1 rounded-lg border border-white/50 overflow-hidden"
-      ></motion.div>
+      >
+        <p className="text-sm p-2">
+          <span className="text-gray-500">Room State: </span>
+          {roomState === ConnectionState.Connecting ? (
+            <LoadingSVG diameter={16} strokeWidth={2} />
+          ) : (
+            roomState.toUpperCase()
+          )}
+        </p>
+        <p className="text-sm p-2">
+          <span className="text-gray-500">Agent connected: </span>
+          {voiceAssistant.agent ? (
+            "TRUE"
+          ) : roomState === ConnectionState.Connected ? (
+            <LoadingSVG diameter={12} strokeWidth={2} />
+          ) : (
+            "FALSE"
+          )}
+        </p>
+        <p className="text-sm p-2">
+          <span className="text-gray-500">Room Name:</span> {name}
+        </p>
+        <p className="text-sm p-2">
+          <span className="text-gray-500">Participant Name: </span>
+          {localParticipant.name}
+        </p>
+        <p className="text-sm p-2">
+          <span className="text-gray-500">Participant ID: </span>
+          {localParticipant?.identity}
+        </p>
+
+        <p className="text-sm p-2">
+          <span className="text-gray-500">Connected At: </span>
+          {roomState === ConnectionState.Connected &&
+            new Date().toLocaleTimeString()}
+        </p>
+      </motion.div>
     </div>
   );
 }

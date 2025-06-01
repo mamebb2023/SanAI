@@ -5,15 +5,13 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import Button from "../shared/Button";
 import { PiFlowerLotus } from "react-icons/pi";
-import SimpleDecore from "../decorations/SimpleDecore";
 
 const CTA = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.4 });
 
   return (
-    <div ref={ref} className="relative h-[110vh] w-full flex-center overflow-x-hidden">
-      <SimpleDecore isInView={isInView} />
+    <div ref={ref} className="relative h-[110vh] w-full flex-center">
       {/* Animated background elements */}
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -33,32 +31,6 @@ const CTA = () => {
         <div className="absolute size-[80%] rounded-full border-2 border-cyan-500" />
         <div className="absolute size-[80%] rounded-full border-4 border-cyan-500/80 blur-md" />
         <div className="absolute size-[60%] rounded-full bg-gradient-to-br from-blue-900/60 to-cyan-900/80" />
-      </motion.div>
-
-      <motion.div
-        animate={{
-          rotate: 360,
-          transition: {
-            duration: 10,
-            repeat: Infinity,
-            ease: "linear",
-          },
-        }}
-        className="absolute size-[100vh] flex-center"
-      >
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 0.3, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="absolute top-1/4 left-1/4 size-40 rounded-full bg-blue-500 blur-3xl"
-        />
-
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 0.3, y: 0 } : {}}
-          transition={{ delay: 0.7, duration: 1 }}
-          className="absolute bottom-1/4 right-1/4 size-40 rounded-full bg-cyan-500 blur-3xl"
-        />
       </motion.div>
 
       {/* Content */}

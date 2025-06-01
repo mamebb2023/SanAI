@@ -18,7 +18,7 @@ const Button = ({
       : "py-[12px] bg-gradient-to-br from-blue-500 to-cyan-500 hover:shadow-sm shadow-white/40";
   return (
     <button
-      className={`${className} ${containerClass} px-5 rounded-xl transition-all cursor-pointer`}
+      className={`${className} ${containerClass} px-5 rounded-xl transition-all cursor-pointer active:scale-95`}
       {...props}
     >
       {children}

@@ -12,7 +12,7 @@ const Hero = () => {
   return (
     <div className="relative flex-center pt-20 md:pt-40 px-5 md:px-20 lg:px-32">
       <div
-        className="hidden md:block z-20 absolute bottom-0 w-screen h-[80vh] lg:h-screen"
+        className="hidden md:block z-20 absolute bottom-0 w-screen h-[80vh] lg:h-[110vh]"
         style={{
           background:
             "radial-gradient(circle at 50% 0%, transparent 40%, #00032b 60%)",
@@ -100,6 +100,9 @@ const Hero = () => {
         </motion.div>
 
         {/* Hero Image */}
+        {/* <div className="relative z-10 h-14 translate-y-1/2 w-full flex-center">
+          <div className="absolute size-[120%] bg-[#00032b] blur-md"></div>
+        </div> */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
