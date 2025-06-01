@@ -39,7 +39,7 @@ export default function TranscriptionView() {
       transition={{ duration: 0.5 }}
       className="relative"
     >
-      <div ref={containerRef} className="flex flex-col items-end gap-2">
+      <div ref={containerRef} className="flex items-end flex-col-reverse gap-2">
         {combinedTranscriptions.map((segment) => (
           <div
             id={segment.id}

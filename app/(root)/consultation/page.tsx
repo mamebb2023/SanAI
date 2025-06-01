@@ -38,6 +38,10 @@ import { ConnectionDetails } from "@/app/api/connection-details/route";
 
 export default function Page() {
   const [room] = useState(new Room());
+  const [cooldownRemaining, setCooldownRemaining] = useState<number | null>(
+    null
+  );
+  const [sessionRemaining, setSessionRemaining] = useState<number | null>(null);
 
   const onConnectButtonClicked = useCallback(async () => {
     // Generate room connection details, including:
@@ -57,6 +61,16 @@ export default function Page() {
     const response = await fetch(url.toString());
     const connectionDetailsData: ConnectionDetails = await response.json();
 
+    if (response.status === 403) {
+      if ((connectionDetailsData as any)?.remaining) {
+        setCooldownRemaining(
+          Math.floor((connectionDetailsData as any).remaining / 1000)
+        );
+      }
+      toast.error("You're have used your session. Please wait.");
+      return;
+    }
+
     toast.promise(
       () =>
         room.connect(
@@ -65,8 +79,11 @@ export default function Page() {
         ),
       {
         loading: "Connecting...",
-        success: "Connected!",
-        error: "Error Connecting To Ai.",
+        success: () => {
+          setSessionRemaining(120); // 2 minutes = 120 seconds
+          return "Connected!";
+        },
+        error: "Error Connecting To AI.",
       }
     );
 
@@ -84,12 +101,56 @@ export default function Page() {
   }, [room]);
 
   useEffect(() => {
+    if (sessionRemaining === null) return;
+
+    const interval = setInterval(() => {
+      setSessionRemaining((prev) => {
+        if (!prev || prev <= 1) {
+          clearInterval(interval);
+          // Optional: handle session end (auto disconnect, UI update, etc.)
+          if (prev === 0) {
+            toast.error("Session has ended. Disconnecting...");
+            room.disconnect();
+          }
+          return null;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [sessionRemaining]);
+
+  useEffect(() => {
     room.on(RoomEvent.MediaDevicesError, onDeviceFailure);
 
     return () => {
       room.off(RoomEvent.MediaDevicesError, onDeviceFailure);
     };
   }, [room]);
+
+  useEffect(() => {
+    if (cooldownRemaining === null) return;
+
+    const interval = setInterval(() => {
+      setCooldownRemaining((prev) => {
+        if (prev === null || prev <= 1) {
+          clearInterval(interval);
+          // Optional: handle cooldown end (UI update, etc.)
+          if (prev === 0) {
+            toast.success("You can now reconnect.");
+            setCooldownRemaining(null); // Reset cooldown
+          }
+          return null;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [cooldownRemaining]);
+
+  useEffect(() => {}, [sessionRemaining]);
 
   return (
     <RoomContext.Provider value={room}>
@@ -108,9 +169,21 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="flex-1 flex gap-2 p-2">
+        <div className="flex-1 flex gap-2 p-2 relative">
+          <div className="absolute top-3 left-1/2">
+            {sessionRemaining !== null && (
+              <div className="text-center text-green-600 font-semibold mt-4">
+                Session ends in {Math.floor(sessionRemaining / 60)}:
+                {String(sessionRemaining % 60).padStart(2, "0")} minutes
+              </div>
+            )}
+          </div>
           <LeftSection />
-          <MiddleSection onConnectButtonClicked={onConnectButtonClicked} />
+          <MiddleSection
+            onConnectButtonClicked={onConnectButtonClicked}
+            cooldownRemaining={cooldownRemaining}
+            sessionRemaining={sessionRemaining}
+          />
           <RightSection />
         </div>
       </div>
@@ -118,7 +191,11 @@ export default function Page() {
   );
 }
 
-function MiddleSection(props: { onConnectButtonClicked: () => void }) {
+function MiddleSection(props: {
+  onConnectButtonClicked: () => void;
+  cooldownRemaining: number | null;
+  sessionRemaining: number | null;
+}) {
   const { state: agentState } = useVoiceAssistant();
   const voiceAssistant = useVoiceAssistant();
 
@@ -142,7 +219,20 @@ function MiddleSection(props: { onConnectButtonClicked: () => void }) {
           </motion.div>
         ) : (
           <div className="absolute top-2">
-            <Tip />
+            {props.cooldownRemaining !== null ? (
+              <div className="text-center text-red-600 font-semibold mb-2">
+                Please wait {Math.floor(props.cooldownRemaining / 60)}:
+                {String(props.cooldownRemaining % 60).padStart(2, "0")} minutes
+                before reconnecting.
+              </div>
+            ) : props.sessionRemaining !== null ? (
+              <div className="text-center text-red-600 font-semibold mb-2">
+                Session ends in {Math.floor(props.sessionRemaining / 60)}:
+                {String(props.sessionRemaining % 60).padStart(2, "0")} minutes
+              </div>
+            ) : (
+              <Tip />
+            )}
           </div>
         )}
       </AnimatePresence>
