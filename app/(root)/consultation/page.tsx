@@ -170,19 +170,12 @@ export default function Page() {
         </div>
 
         <div className="flex-1 flex gap-2 p-2 relative">
-          <div className="absolute top-3 left-1/2">
-            {sessionRemaining !== null && (
-              <div className="text-center text-green-600 font-semibold mt-4">
-                Session ends in {Math.floor(sessionRemaining / 60)}:
-                {String(sessionRemaining % 60).padStart(2, "0")} minutes
-              </div>
-            )}
-          </div>
           <LeftSection />
           <MiddleSection
             onConnectButtonClicked={onConnectButtonClicked}
             cooldownRemaining={cooldownRemaining}
             sessionRemaining={sessionRemaining}
+            setSessionRemaining={setSessionRemaining}
           />
           <RightSection />
         </div>
@@ -195,6 +188,7 @@ function MiddleSection(props: {
   onConnectButtonClicked: () => void;
   cooldownRemaining: number | null;
   sessionRemaining: number | null;
+  setSessionRemaining: (value: number | null) => void;
 }) {
   const { state: agentState } = useVoiceAssistant();
   const voiceAssistant = useVoiceAssistant();
@@ -220,13 +214,13 @@ function MiddleSection(props: {
         ) : (
           <div className="absolute top-2">
             {props.cooldownRemaining !== null ? (
-              <div className="text-center text-red-600 font-semibold mb-2">
+              <div className="text-center text-red-100 font-semibold mb-2">
                 Please wait {Math.floor(props.cooldownRemaining / 60)}:
                 {String(props.cooldownRemaining % 60).padStart(2, "0")} minutes
                 before reconnecting.
               </div>
             ) : props.sessionRemaining !== null ? (
-              <div className="text-center text-red-600 font-semibold mb-2">
+              <div className="text-center text-green-100 font-semibold mb-2">
                 Session ends in {Math.floor(props.sessionRemaining / 60)}:
                 {String(props.sessionRemaining % 60).padStart(2, "0")} minutes
               </div>
@@ -283,16 +277,22 @@ function MiddleSection(props: {
       <AnimatePresence>
         {agentState !== "disconnected" && (
           <DisconnectButton>
-            <motion.div
-              key="disconnected"
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 1, type: "spring", stiffness: 100 }}
-              className="absolute left-1/2 -translate-x-1/2 bottom-0 size-14 rounded-full shadow  border border-red-400 flex-center text-3xl text-red-400 hover:text-white font-bold hover:bg-red-500 transition-all cursor-pointer"
+            <div
+              onClick={() => {
+                setSessionRemaining(null);
+              }}
             >
-              <IoClose />
-            </motion.div>
+              <motion.div
+                key="disconnected"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{ duration: 1, type: "spring", stiffness: 100 }}
+                className="absolute left-1/2 -translate-x-1/2 bottom-0 size-14 rounded-full shadow  border border-red-400 flex-center text-3xl text-red-400 hover:text-white font-bold hover:bg-red-500 transition-all cursor-pointer"
+              >
+                <IoClose />
+              </motion.div>
+            </div>
           </DisconnectButton>
         )}
       </AnimatePresence>
