@@ -78,25 +78,25 @@ export default function Page() {
           connectionDetailsData.participantToken
         ),
       {
-        loading: "Connecting...",
+        loading:<p className="text-xs">Connecting...</p>,
         success: () => {
           setSessionRemaining(120); // 2 minutes = 120 seconds
-          return "Connected!";
+          return<p className="text-xs">Connected!</p>;
         },
-        error: "Error Connecting To AI.",
+        error:<p className="text-xs">Error Connecting To AI.</p>,
       }
     );
 
     toast.promise(() => room.localParticipant.setMicrophoneEnabled(true), {
-      loading: "Enabling microphone...",
-      success: "Microphone enabled!",
-      error: "Error enabling microphone.",
+      loading: <p className="text-xs">Enabling microphone...</p>,
+      success: <p className="text-xs">Microphone enabled!</p>,
+      error: <p className="text-xs">Error enabling microphone.</p>,
     });
 
     toast.promise(() => room.localParticipant.setCameraEnabled(true), {
-      loading: "Enabling camera...",
-      success: "Camera enabled!",
-      error: "Error enabling camera.",
+      loading:<p className="text-xs">Enabling camera...</p>,
+      success:<p className="text-xs">Camera enabled!</p>,
+      error:<p className="text-xs">Error enabling camera.</p>,
     });
   }, [room]);
 
@@ -192,6 +192,7 @@ function MiddleSection(props: {
 }) {
   const { state: agentState } = useVoiceAssistant();
   const voiceAssistant = useVoiceAssistant();
+  const [mainBtnLoading, setMainBtnLoading] = useState(false);
 
   return (
     <div className="relative flex-1 flex-center">
@@ -214,13 +215,13 @@ function MiddleSection(props: {
         ) : (
           <div className="absolute top-2">
             {props.cooldownRemaining !== null ? (
-              <div className="text-center text-red-100 font-semibold mb-2">
+              <div className="text-center text-red-200 font-semibold mb-2">
                 Please wait {Math.floor(props.cooldownRemaining / 60)}:
                 {String(props.cooldownRemaining % 60).padStart(2, "0")} minutes
-                before reconnecting.
+                before another session...
               </div>
             ) : props.sessionRemaining !== null ? (
-              <div className="text-center text-green-100 font-semibold mb-2">
+              <div className="text-center text-green-200 font-semibold mb-2">
                 Session ends in {Math.floor(props.sessionRemaining / 60)}:
                 {String(props.sessionRemaining % 60).padStart(2, "0")} minutes
               </div>
@@ -267,9 +268,13 @@ function MiddleSection(props: {
             if (agentState === "disconnected") {
               props.onConnectButtonClicked();
             }
+            setMainBtnLoading(true);
           }}
         >
           <PiFlowerLotusDuotone className="text-white text-4xl" />
+          {agentState === "connecting" && mainBtnLoading && (
+            <LoadingSVG diameter={32} strokeWidth={2} />
+          )}
         </button>
       </motion.div>
 
@@ -393,7 +398,8 @@ function RightSection() {
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
         className="relative flex-1 rounded-lg border border-white/50 overflow-hidden"
       >
-        <p className="text-sm p-2">
+        Data:
+        <p className="text-sm p-2 flex gap-2 items-center">
           <span className="text-gray-500">Room State: </span>
           {roomState === ConnectionState.Connecting ? (
             <LoadingSVG diameter={16} strokeWidth={2} />
@@ -401,7 +407,7 @@ function RightSection() {
             roomState.toUpperCase()
           )}
         </p>
-        <p className="text-sm p-2">
+        <p className="text-sm p-2 flex gap-2 items-center">
           <span className="text-gray-500">Agent connected: </span>
           {voiceAssistant.agent ? (
             "TRUE"
@@ -411,19 +417,18 @@ function RightSection() {
             "FALSE"
           )}
         </p>
-        <p className="text-sm p-2">
+        <p className="text-sm p-2 flex gap-2 items-center">
           <span className="text-gray-500">Room Name:</span> {name}
         </p>
-        <p className="text-sm p-2">
+        <p className="text-sm p-2 flex gap-2 items-center">
           <span className="text-gray-500">Participant Name: </span>
           {localParticipant.name}
         </p>
-        <p className="text-sm p-2">
+        <p className="text-sm p-2 flex gap-2 items-center">
           <span className="text-gray-500">Participant ID: </span>
           {localParticipant?.identity}
         </p>
-
-        <p className="text-sm p-2">
+        <p className="text-sm p-2 flex gap-2 items-center">
           <span className="text-gray-500">Connected At: </span>
           {roomState === ConnectionState.Connected &&
             new Date().toLocaleTimeString()}
