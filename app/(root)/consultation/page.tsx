@@ -277,11 +277,7 @@ function MiddleSection(props: {
       <AnimatePresence>
         {agentState !== "disconnected" && (
           <DisconnectButton>
-            <div
-              onClick={() => {
-                setSessionRemaining(null);
-              }}
-            >
+            <div onClick={() => props.setSessionRemaining(null)}>
               <motion.div
                 key="disconnected"
                 initial={{ opacity: 0, scale: 0 }}
