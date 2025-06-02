@@ -31,6 +31,7 @@ import { PiFlowerLotus, PiFlowerLotusDuotone } from "react-icons/pi";
 import ConnectButtonDecore from "@/components/decorations/ConnectButtonDecore";
 import toast from "react-hot-toast";
 import { FaInfoCircle, FaVideo } from "react-icons/fa";
+import { BsExclamationCircleFill } from "react-icons/bs";
 import DashboardDecore from "@/components/decorations/DashboardDecore";
 import { ConfigurationPanelItem } from "@/components/ConfigurationPanelItem";
 import { LoadingSVG } from "@/components/shared/LoadingSVG";
@@ -67,7 +68,7 @@ export default function Page() {
           Math.floor((connectionDetailsData as any).remaining / 1000)
         );
       }
-      toast.error("You're have used your session. Please wait.");
+      // toast.error("You're have used your session. Please wait.");
       return;
     }
 
@@ -78,12 +79,12 @@ export default function Page() {
           connectionDetailsData.participantToken
         ),
       {
-        loading:<p className="text-xs">Connecting...</p>,
+        loading: <p className="text-xs">Connecting...</p>,
         success: () => {
           setSessionRemaining(120); // 2 minutes = 120 seconds
-          return<p className="text-xs">Connected!</p>;
+          return <p className="text-xs">Connected!</p>;
         },
-        error:<p className="text-xs">Error Connecting To AI.</p>,
+        error: <p className="text-xs">Error Connecting To AI.</p>,
       }
     );
 
@@ -94,9 +95,9 @@ export default function Page() {
     });
 
     toast.promise(() => room.localParticipant.setCameraEnabled(true), {
-      loading:<p className="text-xs">Enabling camera...</p>,
-      success:<p className="text-xs">Camera enabled!</p>,
-      error:<p className="text-xs">Error enabling camera.</p>,
+      loading: <p className="text-xs">Enabling camera...</p>,
+      success: <p className="text-xs">Camera enabled!</p>,
+      error: <p className="text-xs">Error enabling camera.</p>,
     });
   }, [room]);
 
@@ -157,7 +158,7 @@ export default function Page() {
       <div className="relative h-screen flex">
         <DashboardDecore />
 
-        <div className="bg-white/20 backdrop-blur-sm w-[60px] h-full flex flex-col justify-between items-center py-4">
+        <div className="bg-white/20 backdrop-blur-sm w-[60px] h-full flex flex-col gap-2 items-center py-4">
           <Logo />
           <div className="text-xl">
             <Link
@@ -213,17 +214,23 @@ function MiddleSection(props: {
             <RoomAudioRenderer />
           </motion.div>
         ) : (
-          <div className="absolute top-2">
+          <div className="absolute top-2 text-sm">
             {props.cooldownRemaining !== null ? (
-              <div className="text-center text-red-200 font-semibold mb-2">
-                Please wait {Math.floor(props.cooldownRemaining / 60)}:
-                {String(props.cooldownRemaining % 60).padStart(2, "0")} minutes
-                before another session...
+              <div className="text-center p-2 rounded-xl bg-red-100 text-red-900 font-semibold mb-2 flex items-center gap-2">
+                <BsExclamationCircleFill />
+                <p>
+                  Please wait {Math.floor(props.cooldownRemaining / 60)}:
+                  {String(props.cooldownRemaining % 60).padStart(2, "0")}{" "}
+                  minutes before another session...
+                </p>
               </div>
             ) : props.sessionRemaining !== null ? (
-              <div className="text-center text-green-200 font-semibold mb-2">
-                Session ends in {Math.floor(props.sessionRemaining / 60)}:
-                {String(props.sessionRemaining % 60).padStart(2, "0")} minutes
+              <div className="text-center p-2 rounded-xl bg-green-100 text-green-900 font-semibold mb-2 flex items-center gap-2">
+                <FaInfoCircle />
+                <p>
+                  Session ends in {Math.floor(props.sessionRemaining / 60)}:
+                  {String(props.sessionRemaining % 60).padStart(2, "0")} minutes
+                </p>
               </div>
             ) : (
               <Tip />
@@ -273,10 +280,9 @@ function MiddleSection(props: {
         >
           <PiFlowerLotusDuotone className="text-white text-4xl" />
           <div className="absoulut">
-
-          {agentState === "connecting" && mainBtnLoading && (
-            <LoadingSVG diameter={32} strokeWidth={1} />
-          )}
+            {agentState === "connecting" && mainBtnLoading && (
+              <LoadingSVG diameter={32} strokeWidth={1} />
+            )}
           </div>
         </button>
       </motion.div>
@@ -399,9 +405,9 @@ function RightSection() {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className="relative flex-1 rounded-lg p-2 border border-white/50 overflow-hidden"
+        className="relative flex-1 rounded-lg p-2 border border-blue-900 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 overflow-hidden"
       >
-        Data:
+        Detail:
         <p className="text-sm p-2 flex gap-2 items-center">
           <span className="text-gray-500">Room State: </span>
           {roomState === ConnectionState.Connecting ? (
