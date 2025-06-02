@@ -114,6 +114,8 @@ const Footer = () => {
                 <Link
                   href={link.href}
                   className="text-sm text-gray-400 hover:text-white transition-all duration-300 hover:pl-2"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   {link.label}
                 </Link>

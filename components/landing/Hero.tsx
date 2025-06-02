@@ -87,7 +87,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1 }}
-          className="flex flex-wrap justify-center gap-4 mt-6"
+          className="relative z-30 flex flex-wrap justify-center gap-4 mt-6"
         >
           <Link href="/consultation?utm_source=hero">
             <Button className="px-8 py-3 text-lg">Meet Doctor</Button>
@@ -110,7 +110,7 @@ const Hero = () => {
           className="relative w-full max-w-5xl aspect-video my-10 md:my-16 p-8"
         >
           <HeroImageDecorations />
-          <div className="relative size-full border-x border-t border-white/50 bg-white/10 backdrop-blur-sm inset-0 bg-[url('/dashboard.png')] bg-cover bg-center bg-no-repeat object-center object-contain rounded-2xl">
+          <div className="relative size-full border-x border-t border-white/50 bg-white/10 backdrop-blur-sm inset-0 bg-[url('/dashboard.png')] bg-cover bg-center bg-no-repeat object-center object-contain rounded-3xl">
             <div className="absolute -inset-2 border-8 blur-sm"></div>
           </div>
         </motion.div>

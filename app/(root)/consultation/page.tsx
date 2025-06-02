@@ -45,15 +45,6 @@ export default function Page() {
   const [sessionRemaining, setSessionRemaining] = useState<number | null>(null);
 
   const onConnectButtonClicked = useCallback(async () => {
-    // Generate room connection details, including:
-    //   - A random Room name
-    //   - A random Participant name
-    //   - An Access Token to permit the participant to join the room
-    //   - The URL of the LiveKit server to connect to
-    //
-    // In real-world application, you would likely allow the user to specify their
-    // own participant name, and possibly to choose from existing rooms to join.
-
     const url = new URL(
       process.env.NEXT_PUBLIC_CONN_DETAILS_ENDPOINT ??
         "/api/connection-details",
@@ -68,7 +59,6 @@ export default function Page() {
           Math.floor((connectionDetailsData as any).remaining / 1000)
         );
       }
-      // toast.error("You're have used your session. Please wait.");
       return;
     }
 
@@ -151,8 +141,6 @@ export default function Page() {
     return () => clearInterval(interval);
   }, [cooldownRemaining]);
 
-  useEffect(() => {}, [sessionRemaining]);
-
   return (
     <RoomContext.Provider value={room}>
       <div className="relative h-screen flex">
@@ -199,59 +187,56 @@ function MiddleSection(props: {
     <div className="relative flex-1 flex-center">
       <ConnectButtonDecore />
 
-      <AnimatePresence>
-        {agentState !== "disconnected" ? (
-          <motion.div
-            key="connected"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
-            transition={{ duration: 1, type: "spring", stiffness: 100 }}
-            className={`absolute size-28 rounded-full bg-white blur-2xl ${
-              agentState === "connecting" ? "animate-pulse" : ""
-            }`}
-          >
-            <RoomAudioRenderer />
-          </motion.div>
-        ) : (
-          <div className="absolute top-2 text-sm">
-            {props.cooldownRemaining !== null ? (
-              <div className="text-center p-2 rounded-xl bg-red-100 text-red-900 font-semibold mb-2 flex items-center gap-2">
-                <BsExclamationCircleFill />
-                <p>
-                  Please wait {Math.floor(props.cooldownRemaining / 60)}:
-                  {String(props.cooldownRemaining % 60).padStart(2, "0")}{" "}
-                  minutes before another session...
-                </p>
-              </div>
-            ) : props.sessionRemaining !== null ? (
-              <div className="text-center p-2 rounded-xl bg-green-100 text-green-900 font-semibold mb-2 flex items-center gap-2">
-                <FaInfoCircle />
-                <p>
-                  Session ends in {Math.floor(props.sessionRemaining / 60)}:
-                  {String(props.sessionRemaining % 60).padStart(2, "0")} minutes
-                </p>
-              </div>
-            ) : (
-              <Tip />
-            )}
-          </div>
-        )}
-      </AnimatePresence>
+      {agentState !== "disconnected" && (
+        <motion.div
+          transition={{ duration: 1, type: "spring", stiffness: 100 }}
+          className={`absolute size-28 rounded-full bg-white blur-2xl  ${
+            agentState === "connecting" ? "animate-pulse" : ""
+          }`}
+        >
+          <RoomAudioRenderer />
+        </motion.div>
+      )}
 
-      {/* {agentState !== "disconnected" && ( */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0 }}
+        className="absolute top-2 text-sm"
+      >
+        {props.cooldownRemaining !== null ? (
+          <div className="text-center p-2 rounded-xl bg-red-100 text-red-900 font-semibold mb-2 flex items-center gap-2">
+            <BsExclamationCircleFill />
+            <p>
+              Please wait {Math.floor(props.cooldownRemaining / 60)}:
+              {String(props.cooldownRemaining % 60).padStart(2, "0")} minutes
+              before another session...
+            </p>
+          </div>
+        ) : props.sessionRemaining !== null ? (
+          <div className="text-center p-2 rounded-xl bg-green-100 text-green-900 font-semibold mb-2 flex items-center gap-2">
+            <FaInfoCircle />
+            <p>
+              Session ends in {Math.floor(props.sessionRemaining / 60)}:
+              {String(props.sessionRemaining % 60).padStart(2, "0")} minutes
+            </p>
+          </div>
+        ) : (
+          <Tip />
+        )}
+      </motion.div>
+
       <div className="absolute h-48 w-full flex-center">
         <BarVisualizer
           state={voiceAssistant.state}
           barCount={10}
           trackRef={voiceAssistant.audioTrack}
-          options={{ minHeight: 40 }}
+          options={{ minHeight: 40, maxHeight: 80 }}
           className="size-full flex-center flex-wrap gap-1"
         >
           <div className="size-10 rounded-full bg-white/10" />
         </BarVisualizer>
       </div>
-      {/* )} */}
 
       {/* connect button */}
       <motion.div
@@ -313,9 +298,9 @@ function MiddleSection(props: {
 
 function LeftSection() {
   return (
-    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 backdrop-blur-sm rounded-xl p-4 md:flex flex-wrap gap-2 flex-col">
+    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 rounded-xl p-4 md:flex flex-wrap gap-2 flex-col">
       <p>Text Visualization</p>
-      <div className="flex-1 bg-white/5 rounded-md p-2 overflow-y-auto items-end">
+      <div className="flex-1 bg-white/5 rounded-md p-2 overflow-y-auto items-end backdrop-blur-sm">
         <TranscriptionView />
       </div>
     </div>
@@ -418,7 +403,7 @@ function RightSection() {
           )}
         </p>
         <p className="text-sm p-2 flex gap-2 items-center">
-          <span className="text-gray-500">Agent connected: </span>
+          <span className="text-gray-500">Doctor AI connected: </span>
           {voiceAssistant.agent ? (
             "TRUE"
           ) : roomState === ConnectionState.Connected ? (
