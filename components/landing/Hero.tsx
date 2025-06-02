@@ -15,7 +15,7 @@ const Hero = () => {
         className="hidden md:block z-20 absolute bottom-0 w-screen h-[80vh] lg:h-[110vh]"
         style={{
           background:
-            "radial-gradient(circle at 50% 0%, transparent 40%, #00032b 60%)",
+            "radial-gradient(circle at 50% 0%, transparent 50%, #00032b 70%)",
         }}
       />
 
@@ -110,7 +110,9 @@ const Hero = () => {
           className="relative w-full max-w-5xl aspect-video my-10 md:my-16 p-8"
         >
           <HeroImageDecorations />
-          <div className="p-6 relative size-full border-x border-t bg-white/10 backdrop-blur-sm inset-0 bg-[url('/world.png')] bg-contain bg-center bg-no-repeat object-center object-contain rounded-2xl" />
+          <div className="relative size-full border-x border-t border-white/50 bg-white/10 backdrop-blur-sm inset-0 bg-[url('/dashboard.png')] bg-cover bg-center bg-no-repeat object-center object-contain rounded-2xl">
+            <div className="absolute -inset-2 border-8 blur-sm"></div>
+          </div>
         </motion.div>
       </div>
     </div>

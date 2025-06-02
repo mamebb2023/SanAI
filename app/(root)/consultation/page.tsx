@@ -280,7 +280,7 @@ function MiddleSection(props: {
           }}
         >
           <PiFlowerLotusDuotone className="text-white text-4xl" />
-          <div className="absoulut">
+          <div className="absolute opacity-50">
             {agentState === "connecting" && mainBtnLoading && (
               <LoadingSVG diameter={32} strokeWidth={1} />
             )}

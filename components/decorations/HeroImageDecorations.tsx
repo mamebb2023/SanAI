@@ -20,11 +20,11 @@ const HeroImageDecorations = () => {
         }}
       />
 
-      <div className="hidden md:block absolute top-10 left-10 size-60 bg-cyan-500 rounded-full blur-3xl" />
+      {/* <div className="hidden md:block absolute top-10 left-10 size-60 bg-cyan-500 rounded-full blur-3xl" /> */}
       <div className="absolute top-0 left-0 size-40 bg-blue-500 rounded-full blur-3xl" />
       <div className="hidden md:block absolute z-30 -top-10 -left-10 size-20 bg-white rounded-full blur-2xl" />
 
-      <div className="hidden md:block absolute top-10 right-10 size-60 bg-blue-500 rounded-full blur-3xl" />
+      {/* <div className="hidden md:block absolute top-10 right-10 size-60 bg-blue-500 rounded-full blur-3xl" /> */}
       <div className="absolute top-0 -right-0 size-40 bg-cyan-500 rounded-full blur-3xl" />
       <div className="hidden md:block absolute -top-10 -right-10 size-20 bg-white rounded-full blur-2xl" />
     </div>

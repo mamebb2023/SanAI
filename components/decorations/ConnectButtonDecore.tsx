@@ -26,7 +26,7 @@ const ConnectButtonDecore = () => {
           type: "spring",
           delay: 0.4,
         }}
-        className="absolute size-80 rounded-full border-x-4 border-blue-500 blur-sm slow-spin"
+        className="absolute size-80 rounded-full border-x-6 border-blue-500 blur-sm slow-spin"
       />
 
       <motion.div
@@ -49,7 +49,7 @@ const ConnectButtonDecore = () => {
           type: "spring",
           delay: 0.2,
         }}
-        className="absolute size-60 rounded-full border-x-4 border-cyan-500 blur-sm slow-spin"
+        className="absolute size-60 rounded-full border-x-6 border-cyan-500 blur-sm slow-spin"
         style={{ animationDirection: "reverse" }}
       />
     </>
