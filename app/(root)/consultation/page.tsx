@@ -272,9 +272,12 @@ function MiddleSection(props: {
           }}
         >
           <PiFlowerLotusDuotone className="text-white text-4xl" />
+          <div className="absoulut">
+
           {agentState === "connecting" && mainBtnLoading && (
-            <LoadingSVG diameter={32} strokeWidth={2} />
+            <LoadingSVG diameter={32} strokeWidth={1} />
           )}
+          </div>
         </button>
       </motion.div>
 
@@ -333,7 +336,7 @@ function RightSection() {
   );
 
   return (
-    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 backdrop-blur-sm rounded-xl p-4 md:flex flex-col gap-2">
+    <div className="relative w-[90%] md:w-[27%] bg-white/10 backdrop-blur-sm rounded-xl p-4 flex flex-col gap-2">
       {/* video track */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
@@ -396,7 +399,7 @@ function RightSection() {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className="relative flex-1 rounded-lg border border-white/50 overflow-hidden"
+        className="relative flex-1 rounded-lg p-2 border border-white/50 overflow-hidden"
       >
         Data:
         <p className="text-sm p-2 flex gap-2 items-center">

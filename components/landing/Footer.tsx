@@ -12,7 +12,7 @@ const Footer = () => {
   const socials = [
     {
       name: "GitHub",
-      link: "https://github.com/mamebb2023/",
+      link: "https://github.com/mamebb2023/sanai",
     },
     {
       name: "X",
