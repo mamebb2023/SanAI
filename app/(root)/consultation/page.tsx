@@ -239,18 +239,19 @@ function MiddleSection(props: {
         )}
       </AnimatePresence>
 
-      {agentState !== "disconnected" && (
-        <div className="absolute h-48 w-full">
-          <BarVisualizer
-            state={voiceAssistant.state}
-            barCount={7}
-            trackRef={voiceAssistant.audioTrack}
-            options={{ minHeight: 0 }}
-          >
-            <div className="size-20 rounded-full bg-white/50" />
-          </BarVisualizer>
-        </div>
-      )}
+      {/* {agentState !== "disconnected" && ( */}
+      <div className="absolute h-48 w-full flex-center">
+        <BarVisualizer
+          state={voiceAssistant.state}
+          barCount={10}
+          trackRef={voiceAssistant.audioTrack}
+          options={{ minHeight: 40 }}
+          className="size-full flex-center flex-wrap gap-1"
+        >
+          <div className="size-10 rounded-full bg-white/10" />
+        </BarVisualizer>
+      </div>
+      {/* )} */}
 
       {/* connect button */}
       <motion.div
