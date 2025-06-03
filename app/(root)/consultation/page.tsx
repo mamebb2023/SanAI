@@ -24,13 +24,15 @@ import {
   RoomEvent,
   ConnectionState,
 } from "livekit-client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Logo from "@/components/shared/Logo";
 import Link from "next/link";
 import { PiFlowerLotus, PiFlowerLotusDuotone } from "react-icons/pi";
 import ConnectButtonDecore from "@/components/decorations/ConnectButtonDecore";
 import toast from "react-hot-toast";
-import { FaInfoCircle, FaVideo } from "react-icons/fa";
+import { FaInfoCircle } from "react-icons/fa";
+import { FiUploadCloud } from "react-icons/fi";
+
 import { BsExclamationCircleFill } from "react-icons/bs";
 import DashboardDecore from "@/components/decorations/DashboardDecore";
 import { ConfigurationPanelItem } from "@/components/ConfigurationPanelItem";
@@ -84,11 +86,11 @@ export default function Page() {
       error: <p className="text-xs">Error enabling microphone.</p>,
     });
 
-    toast.promise(() => room.localParticipant.setCameraEnabled(true), {
-      loading: <p className="text-xs">Enabling camera...</p>,
-      success: <p className="text-xs">Camera enabled!</p>,
-      error: <p className="text-xs">Error enabling camera.</p>,
-    });
+    // toast.promise(() => room.localParticipant.setCameraEnabled(true), {
+    //   loading: <p className="text-xs">Enabling camera...</p>,
+    //   success: <p className="text-xs">Camera enabled!</p>,
+    //   error: <p className="text-xs">Error enabling camera.</p>,
+    // });
   }, [room]);
 
   useEffect(() => {
@@ -158,7 +160,7 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="flex-1 flex gap-2 p-2 relative">
+        <div className="flex-1 flex flex-col md:flex-row gap-2 p-2 relative">
           <LeftSection />
           <MiddleSection
             onConnectButtonClicked={onConnectButtonClicked}
@@ -166,7 +168,7 @@ export default function Page() {
             sessionRemaining={sessionRemaining}
             setSessionRemaining={setSessionRemaining}
           />
-          <RightSection />
+          <RightSection room={room} />
         </div>
       </div>
     </RoomContext.Provider>
@@ -307,52 +309,41 @@ function LeftSection() {
   );
 }
 
-function RightSection() {
+function RightSection(props: { room: Room }) {
   const tracks = useTracks();
   const { name } = useRoomInfo();
   const { localParticipant } = useLocalParticipant();
   const roomState = useConnectionState();
   const voiceAssistant = useVoiceAssistant();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const localTracks = tracks.filter(
     ({ participant }) => participant instanceof LocalParticipant
   );
-  const localCameraTrack = localTracks.find(
-    ({ source }) => source === Track.Source.Camera
-  );
-  // const localScreenTrack = localTracks.find(
-  //   ({ source }) => source === Track.Source.ScreenShare
-  // );
   const localMicTrack = localTracks.find(
     ({ source }) => source === Track.Source.Microphone
   );
 
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !props.room?.localParticipant) return;
+
+    try {
+      const info = await props.room.localParticipant.sendFile(file, {
+        mimeType: file.type,
+        topic: "my-topic",
+        onProgress: (progress) => {
+          toast.success(`Uploading File ${progress * 100}%`);
+        },
+      });
+      console.log(`Sent file with stream ID: ${info.id}`);
+    } catch (err) {
+      console.error("Error sending file:", err);
+    }
+  };
+
   return (
     <div className="relative w-[90%] md:w-[27%] bg-white/10 backdrop-blur-sm rounded-xl p-4 flex flex-col gap-2">
-      {/* video track */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8 }}
-        transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className="relative h-[200px] rounded-lg border border-white/50 overflow-hidden"
-      >
-        {localCameraTrack ? (
-          <ConfigurationPanelItem title="Camera" source={Track.Source.Camera}>
-            <div className="relative w-full">
-              <VideoTrack
-                className="rounded-sm w-full"
-                trackRef={localCameraTrack}
-              />
-            </div>
-          </ConfigurationPanelItem>
-        ) : (
-          <div className="size-full bg-white/10 flex-center flex-col text-white/50">
-            <FaVideo className="text-4xl" />
-          </div>
-        )}
-      </motion.div>
-
       {/* sound track */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
@@ -384,6 +375,51 @@ function RightSection() {
             <RiVoiceprintLine className="text-4xl" />
           </div>
         )}
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
+        className={`relative h-[150px] rounded-lg border-2 border-dashed border-white/50 transition-colors duration-200 overflow-hidden flex flex-col items-center justify-center bg-white/10 text-white p-4 ${
+          props.room.state === "disconnected" ||
+          props.room.state === "connecting"
+            ? "opacity-50 cursor-not-allowed"
+            : "hover:border-gray-500"
+        }`}
+      >
+        <div className="flex flex-col items-center justify-center text-center">
+          <label
+            htmlFor="file-upload"
+            className={`${
+              props.room.state === "disconnected" ||
+              props.room.state === "connecting"
+                ? "opacity-50 cursor-not-allowed"
+                : "cursor-pointer hover:bg-white/20 hover:text-white"
+            }  flex flex-col items-center justify-center p-4 rounded-lg transition-all duration-200 group`}
+          >
+            <FiUploadCloud className="text-3xl text-gray-400 group-hover:text-white transition-colors duration-200 mb-2" />
+            <span className="font-semibold text-gray-300 group-hover:text-white transition-colors duration-200">
+              Upload an Image for The AI to Analyze
+            </span>
+            <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors duration-200 mt-1">
+              (PNG, JPG up to 2MB)
+            </span>
+            <input
+              id="file-upload"
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpg,image/png"
+              className="hidden"
+              disabled={
+                props.room.state === "disconnected" ||
+                props.room.state === "connecting"
+              }
+              onChange={handleFileChange}
+            />
+          </label>
+        </div>
       </motion.div>
 
       <motion.div
