@@ -316,6 +316,7 @@ function RightSection(props: { room: Room }) {
   const roomState = useConnectionState();
   const voiceAssistant = useVoiceAssistant();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [imageUploaded, setImageUploaded] = useState(false);
 
   const localTracks = tracks.filter(
     ({ participant }) => participant instanceof LocalParticipant
@@ -326,19 +327,27 @@ function RightSection(props: { room: Room }) {
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file || !props.room?.localParticipant) return;
+    if (!file || !props.room?.localParticipant || imageUploaded) return;
 
     try {
       const info = await props.room.localParticipant.sendFile(file, {
         mimeType: file.type,
         topic: "images",
         onProgress: (progress) => {
-          toast.success(`Uploading File ${progress * 100}%`);
+          toast.success(
+            `Uploading and Sending File: ${Math.floor(progress * 100)}%`
+          );
         },
       });
       console.log(`Sent file with stream ID: ${info.id}`);
+      setImageUploaded(true); // 🔒 Block further uploads
     } catch (err) {
       console.error("Error sending file:", err);
+    } finally {
+      toast.success("Image uploaded successfully!");
+      // if (fileInputRef.current) {
+      //   fileInputRef.current.value = ""; // Allow selecting the same file again if needed
+      // }
     }
   };
 

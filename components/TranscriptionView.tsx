@@ -1,7 +1,8 @@
 import useCombinedTranscriptions from "@/hooks/useCombinedTranscriptions";
 import * as React from "react";
-import { FaInfoCircle } from "react-icons/fa";
+import { FaInfoCircle, FaRegUser } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function TranscriptionView() {
   const combinedTranscriptions = useCombinedTranscriptions();
@@ -35,13 +36,33 @@ export default function TranscriptionView() {
           <div
             id={segment.id}
             key={segment.id}
-            className={
-              segment.role === "assistant"
-                ? "p-2 self-start fit-content border rounded-e-2xl rounded-t-2xl border-white bg-white/10"
-                : "border rounded-s-2xl rounded-t-2xl border-cyan-500 bg-cyan-500/20 rounded-md p-2 self-end fit-content"
-            }
+            className="flex gap-2 items-end"
           >
-            {segment.text}
+            {segment.role === "assistant" && (
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-lg flex items-center justify-center">
+                <Image
+                  src="/logo.png"
+                  alt="Assistant Avatar"
+                  width={32}
+                  height={32}
+                  className="w-8 h-8 rounded-full"
+                />
+              </div>
+            )}
+            <div
+              className={
+                segment.role === "assistant"
+                  ? "p-2 self-start fit-content border rounded-e-2xl rounded-t-2xl border-white bg-white/10"
+                  : "border rounded-s-2xl rounded-t-2xl border-cyan-500 bg-cyan-500/20 rounded-md p-2 self-end fit-content"
+              }
+            >
+              {segment.text}
+            </div>
+            {segment.role !== "assistant" && (
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-lg flex items-center justify-center">
+                <FaRegUser />
+              </div>
+            )}
           </div>
         ))}
       </div>
