@@ -9,7 +9,6 @@ import {
   DisconnectButton,
   RoomAudioRenderer,
   RoomContext,
-  VideoTrack,
   useConnectionState,
   useLocalParticipant,
   useRoomInfo,
@@ -183,7 +182,7 @@ function MiddleSection(props: {
   const [mainBtnLoading, setMainBtnLoading] = useState(false);
 
   return (
-    <div className="relative flex-1 flex-center">
+    <div className="min-h-[80vh] relative flex-1 flex-center min-w-full md:min-w-auto">
       <ConnectButtonDecore />
 
       {agentState !== "disconnected" && (
@@ -225,13 +224,13 @@ function MiddleSection(props: {
         )}
       </motion.div>
 
-      <div className="absolute h-48 w-full flex-center">
+      <div className="absolute h-48 w-screen flex-center">
         <BarVisualizer
           state={voiceAssistant.state}
           barCount={10}
           trackRef={voiceAssistant.audioTrack}
           options={{ minHeight: 30, maxHeight: 80 }}
-          className="size-full flex-center flex-wrap gap-1"
+          className="h-full w-full flex-center flex-wrap gap-1"
         >
           <div className="size-10 rounded-full bg-white/10" />
         </BarVisualizer>
@@ -470,7 +469,7 @@ function RightSection(props: { room: Room }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex-center flex-col gap-2 h-full text-gray-500"
+            className="flex-center flex-col gap-2 h-full text-gray-500 py-2"
           >
             <FaInfoCircle />
             <p className="max-w-[150px] text-center">

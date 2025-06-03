@@ -25,7 +25,7 @@ const HeroDecorations = () => {
             className="absolute top-1/4 left-10 -translate-y-1/2 size-80 hidden md:flex flex-center"
           >
             <div className="absolute size-30 rounded-full bg-blue-500 blur-3xl" />
-            <div className="absolute size-80 rounded-full bg-[url('/circle-dots.webp')] bg-center bg-cover" />
+            <div className="hidden md:block absolute size-80 rounded-full bg-[url('/circle-dots.webp')] bg-center bg-cover" />
           </motion.div>
         </MouseParallax>
 

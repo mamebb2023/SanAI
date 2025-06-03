@@ -11,21 +11,6 @@ import HeroImageDecorations from "@/components/decorations/HeroImageDecorations"
 const Hero = () => {
   return (
     <div className="relative flex-center pt-20 md:pt-40 px-5 md:px-20 lg:px-32">
-      <div
-        className="hidden md:block z-20 absolute bottom-0 w-screen h-[80vh] lg:h-[110vh]"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 0%, transparent 50%, #00032b 70%)",
-        }}
-      />
-
-      <div
-        className="md:hidden z-20 absolute bottom-0 w-screen h-screen"
-        style={{
-          background:
-            "radial-gradient(circle at 50% 0%, transparent 80%, #00032b 85%)",
-        }}
-      />
       <HeroDecorations />
 
       {/* Main Content */}
@@ -99,10 +84,22 @@ const Hero = () => {
           </Link>
         </motion.div>
 
-        {/* Hero Image */}
-        {/* <div className="relative z-10 h-14 translate-y-1/2 w-full flex-center">
-          <div className="absolute size-[120%] bg-[#00032b] blur-md"></div>
-        </div> */}
+        <div
+          className="hidden md:block z-20 absolute bottom-0 w-screen h-[80vh] lg:h-[110vh]"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 0%, transparent 40%, #00032b 60%)",
+          }}
+        />
+
+        <div
+          className="md:hidden z-20 absolute bottom-0 w-screen h-screen"
+          style={{
+            background:
+              "radial-gradient(circle at 50% 0%, transparent 70%, #00032b 85%)",
+          }}
+        />
+
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -110,7 +107,7 @@ const Hero = () => {
           className="relative w-full max-w-5xl aspect-video my-10 md:my-16 p-8"
         >
           <HeroImageDecorations />
-          <div className="relative size-full border-x border-t border-white/50 bg-white/10 backdrop-blur-sm inset-0 bg-[url('/dashboard.png')] bg-cover bg-center bg-no-repeat object-center object-contain rounded-3xl">
+          <div className="relative size-full border-x border-t border-white/50 bg-white/10 backdrop-blur-sm inset-0 bg-[url('/dashboard.png')] bg-cover bg-no-repeat object-center object-contain rounded-xl md:rounded-2xl rounded-3xl">
             <div className="absolute -inset-2 border-8 blur-sm"></div>
           </div>
         </motion.div>
