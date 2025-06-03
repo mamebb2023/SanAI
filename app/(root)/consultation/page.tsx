@@ -331,7 +331,7 @@ function RightSection(props: { room: Room }) {
     try {
       const info = await props.room.localParticipant.sendFile(file, {
         mimeType: file.type,
-        topic: "my-topic",
+        topic: "images",
         onProgress: (progress) => {
           toast.success(`Uploading File ${progress * 100}%`);
         },
