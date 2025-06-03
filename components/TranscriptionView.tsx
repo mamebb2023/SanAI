@@ -36,7 +36,9 @@ export default function TranscriptionView() {
           <div
             id={segment.id}
             key={segment.id}
-            className="flex gap-2 items-end"
+            className={`w-full flex gap-2 items-start ${
+              segment.role === "assistant" ? "justify-start" : "justify-end"
+            }`}
           >
             {segment.role === "assistant" && (
               <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-lg flex-center">
