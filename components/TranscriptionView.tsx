@@ -31,7 +31,7 @@ export default function TranscriptionView() {
       transition={{ duration: 0.5 }}
       className="relative"
     >
-      <div ref={containerRef} className="flex items-end flex-col-reverse gap-2">
+      <div ref={containerRef} className="flex flex-col-reverse gap-2">
         {combinedTranscriptions.map((segment) => (
           <div
             id={segment.id}
@@ -39,7 +39,7 @@ export default function TranscriptionView() {
             className="flex gap-2 items-end"
           >
             {segment.role === "assistant" && (
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-lg flex items-center justify-center">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-lg flex-center">
                 <Image
                   src="/logo.png"
                   alt="Assistant Avatar"
@@ -59,7 +59,7 @@ export default function TranscriptionView() {
               {segment.text}
             </div>
             {segment.role !== "assistant" && (
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-lg flex items-center justify-center">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 border text-lg flex-center">
                 <FaRegUser />
               </div>
             )}

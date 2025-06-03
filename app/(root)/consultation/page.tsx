@@ -73,7 +73,7 @@ export default function Page() {
       {
         loading: <p className="text-xs">Connecting...</p>,
         success: () => {
-          setSessionRemaining(120); // 2 minutes = 120 seconds
+          setSessionRemaining(60);
           return <p className="text-xs">Connected!</p>;
         },
         error: <p className="text-xs">Error Connecting To AI.</p>,
@@ -85,12 +85,6 @@ export default function Page() {
       success: <p className="text-xs">Microphone enabled!</p>,
       error: <p className="text-xs">Error enabling microphone.</p>,
     });
-
-    // toast.promise(() => room.localParticipant.setCameraEnabled(true), {
-    //   loading: <p className="text-xs">Enabling camera...</p>,
-    //   success: <p className="text-xs">Camera enabled!</p>,
-    //   error: <p className="text-xs">Error enabling camera.</p>,
-    // });
   }, [room]);
 
   useEffect(() => {
@@ -98,21 +92,23 @@ export default function Page() {
 
     const interval = setInterval(() => {
       setSessionRemaining((prev) => {
-        if (!prev || prev <= 1) {
+        if (prev === null) return null;
+
+        const next = prev - 1;
+
+        if (next <= 0) {
+          toast.error("Session has ended. Disconnecting...");
+          room.disconnect();
           clearInterval(interval);
-          // Optional: handle session end (auto disconnect, UI update, etc.)
-          if (prev === 0) {
-            toast.error("Session has ended. Disconnecting...");
-            room.disconnect();
-          }
           return null;
         }
-        return prev - 1;
+
+        return next;
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [sessionRemaining]);
+  }, [sessionRemaining, room]);
 
   useEffect(() => {
     room.on(RoomEvent.MediaDevicesError, onDeviceFailure);
@@ -127,16 +123,17 @@ export default function Page() {
 
     const interval = setInterval(() => {
       setCooldownRemaining((prev) => {
-        if (prev === null || prev <= 1) {
+        if (prev === null) return null;
+
+        const next = prev - 1;
+
+        if (next <= 0) {
+          toast.success("You can now reconnect.");
           clearInterval(interval);
-          // Optional: handle cooldown end (UI update, etc.)
-          if (prev === 0) {
-            toast.success("You can now reconnect.");
-            setCooldownRemaining(null); // Reset cooldown
-          }
           return null;
         }
-        return prev - 1;
+
+        return next;
       });
     }, 1000);
 
@@ -233,7 +230,7 @@ function MiddleSection(props: {
           state={voiceAssistant.state}
           barCount={10}
           trackRef={voiceAssistant.audioTrack}
-          options={{ minHeight: 40, maxHeight: 80 }}
+          options={{ minHeight: 30, maxHeight: 80 }}
           className="size-full flex-center flex-wrap gap-1"
         >
           <div className="size-10 rounded-full bg-white/10" />
@@ -333,21 +330,13 @@ function RightSection(props: { room: Room }) {
       const info = await props.room.localParticipant.sendFile(file, {
         mimeType: file.type,
         topic: "images",
-        onProgress: (progress) => {
-          toast.success(
-            `Uploading and Sending File: ${Math.floor(progress * 100)}%`
-          );
-        },
       });
       console.log(`Sent file with stream ID: ${info.id}`);
-      setImageUploaded(true); // 🔒 Block further uploads
+      setImageUploaded(true);
     } catch (err) {
       console.error("Error sending file:", err);
     } finally {
       toast.success("Image uploaded successfully!");
-      // if (fileInputRef.current) {
-      //   fileInputRef.current.value = ""; // Allow selecting the same file again if needed
-      // }
     }
   };
 
@@ -392,6 +381,7 @@ function RightSection(props: { room: Room }) {
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
         className={`relative h-[150px] rounded-lg border-2 border-dashed border-white/50 transition-colors duration-200 overflow-hidden flex flex-col items-center justify-center bg-white/10 text-white p-4 ${
+          imageUploaded ||
           props.room.state === "disconnected" ||
           props.room.state === "connecting"
             ? "opacity-50 cursor-not-allowed"
@@ -402,6 +392,7 @@ function RightSection(props: { room: Room }) {
           <label
             htmlFor="file-upload"
             className={`${
+              imageUploaded ||
               props.room.state === "disconnected" ||
               props.room.state === "connecting"
                 ? "opacity-50 cursor-not-allowed"
@@ -422,6 +413,7 @@ function RightSection(props: { room: Room }) {
               accept="image/jpg,image/png"
               className="hidden"
               disabled={
+                imageUploaded ||
                 props.room.state === "disconnected" ||
                 props.room.state === "connecting"
               }
