@@ -55,7 +55,7 @@ export async function GET(request: Request) {
 
     if (existing) {
       const elapsed = now - existing.lastConnectedAt;
-      const cooldown = 2 * 60_000 + 25 * 60_000; // 32 minutes
+      const cooldown = 1 * 60_000 + 25 * 60_000; // 32 minutes
 
       if (elapsed < cooldown) {
   const remaining = cooldown - elapsed;

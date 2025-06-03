@@ -10,10 +10,10 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   const socials = [
-    {
-      name: "GitHub",
-      link: "https://github.com/mamebb2023/sanai",
-    },
+    // {
+    //   name: "GitHub",
+    //   link: "https://github.com/mamebb2023/sanai",
+    // },
     {
       name: "X",
       link: "https://x.com/",

@@ -84,11 +84,11 @@ export default function Page() {
       error: <p className="text-xs">Error enabling microphone.</p>,
     });
 
-    toast.promise(() => room.localParticipant.setCameraEnabled(true), {
-      loading: <p className="text-xs">Enabling camera...</p>,
-      success: <p className="text-xs">Camera enabled!</p>,
-      error: <p className="text-xs">Error enabling camera.</p>,
-    });
+    // toast.promise(() => room.localParticipant.setCameraEnabled(true), {
+    //   loading: <p className="text-xs">Enabling camera...</p>,
+    //   success: <p className="text-xs">Camera enabled!</p>,
+    //   error: <p className="text-xs">Error enabling camera.</p>,
+    // });
   }, [room]);
 
   useEffect(() => {

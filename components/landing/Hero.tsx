@@ -23,7 +23,7 @@ const Hero = () => {
         className="md:hidden z-20 absolute bottom-0 w-screen h-screen"
         style={{
           background:
-            "radial-gradient(circle at 50% 0%, transparent 70%, #00032b 85%)",
+            "radial-gradient(circle at 50% 0%, transparent 80%, #00032b 85%)",
         }}
       />
       <HeroDecorations />
