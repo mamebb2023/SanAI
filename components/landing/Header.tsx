@@ -48,7 +48,7 @@ const Header = () => {
             transition: { duration: 0.7 },
           }}
           exit={{ y: "-100%", opacity: 0 }}
-          className={`fixed top-2 left-0 z-50 w-full flex-center px-5 md:px-10 lg:px-20`}
+          className={`fixed top-2 left-0 z-50 w-screen flex-center px-5 md:px-10 lg:px-20`}
         >
           <div className="flex-between flex-1 w-full backdrop-blur-sm mx-auto bg-white/10 border border-white/20 rounded-full py-1 px-4 sm:px-8 md:px-20">
             <Link href="/" className="flex items-center gap-2">

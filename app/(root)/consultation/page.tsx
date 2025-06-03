@@ -301,7 +301,7 @@ function MiddleSection(props: {
 function LeftSection() {
   return (
     <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 rounded-xl p-4 md:flex flex-wrap gap-2 flex-col">
-      <p>Text Visualization</p>
+      <p>Live Chat Visualization</p>
       <div className="flex-1 bg-white/5 rounded-md p-2 overflow-y-auto items-end backdrop-blur-sm">
         <TranscriptionView />
       </div>
@@ -429,41 +429,54 @@ function RightSection(props: { room: Room }) {
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
         className="relative flex-1 rounded-lg p-2 border border-blue-900 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 overflow-hidden"
       >
-        Detail:
-        <p className="text-sm p-2 flex gap-2 items-center">
-          <span className="text-gray-500">Room State: </span>
-          {roomState === ConnectionState.Connecting ? (
-            <LoadingSVG diameter={16} strokeWidth={2} />
-          ) : (
-            roomState.toUpperCase()
-          )}
-        </p>
-        <p className="text-sm p-2 flex gap-2 items-center">
-          <span className="text-gray-500">Doctor AI connected: </span>
-          {voiceAssistant.agent ? (
-            "TRUE"
-          ) : roomState === ConnectionState.Connected ? (
-            <LoadingSVG diameter={12} strokeWidth={2} />
-          ) : (
-            "FALSE"
-          )}
-        </p>
-        <p className="text-sm p-2 flex gap-2 items-center">
-          <span className="text-gray-500">Room Name:</span> {name}
-        </p>
-        <p className="text-sm p-2 flex gap-2 items-center">
-          <span className="text-gray-500">Participant Name: </span>
-          {localParticipant.name}
-        </p>
-        <p className="text-sm p-2 flex gap-2 items-center">
-          <span className="text-gray-500">Participant ID: </span>
-          {localParticipant?.identity}
-        </p>
-        <p className="text-sm p-2 flex gap-2 items-center">
-          <span className="text-gray-500">Connected At: </span>
-          {roomState === ConnectionState.Connected &&
-            new Date().toLocaleTimeString()}
-        </p>
+        Details:
+        {roomState === ConnectionState.Connected ? (
+          <>
+            <p className="text-sm p-2 flex gap-2 items-center">
+              <span className="text-gray-500">Room State: </span>
+              {roomState.toUpperCase()}
+            </p>
+            <p className="text-sm p-2 flex gap-2 items-center">
+              <span className="text-gray-500">Doctor AI connected: </span>
+              {voiceAssistant.agent ? (
+                "TRUE"
+              ) : roomState === ConnectionState.Connected ? (
+                <LoadingSVG diameter={12} strokeWidth={2} />
+              ) : (
+                "FALSE"
+              )}
+            </p>
+            <p className="text-sm p-2 flex gap-2 items-center">
+              <span className="text-gray-500">Room Name:</span>{" "}
+              {roomState === ConnectionState.Connected ? (
+                <LoadingSVG diameter={12} strokeWidth={2} />
+              ) : (
+                name
+              )}
+            </p>
+            <p className="text-sm p-2 flex gap-2 items-center">
+              <span className="text-gray-500">Participant Name: </span>
+              {localParticipant.name}
+            </p>
+            <p className="text-sm p-2 flex gap-2 items-center">
+              <span className="text-gray-500">Connected At: </span>
+              {roomState === ConnectionState.Connected &&
+                new Date().toLocaleTimeString()}
+            </p>
+          </>
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="flex-center flex-col gap-2 h-full text-gray-500"
+          >
+            <FaInfoCircle />
+            <p className="max-w-[150px] text-center">
+              Talk to Dr. San to connect to a room.
+            </p>
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );
