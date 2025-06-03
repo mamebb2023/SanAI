@@ -400,7 +400,7 @@ function RightSection(props: { room: Room }) {
           >
             <FiUploadCloud className="text-3xl text-gray-400 group-hover:text-white transition-colors duration-200 mb-2" />
             <span className="font-semibold text-gray-300 group-hover:text-white transition-colors duration-200">
-              Upload an Image for The AI to Analyze
+              Upload an Image for Dr. San to Analyze
             </span>
             <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors duration-200 mt-1">
               (PNG, JPG up to 2MB)
