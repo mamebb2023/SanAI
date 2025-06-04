@@ -20,7 +20,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Tag>Your AI Health Ally</Tag>
+          <Link href="https://dexscreener.com/solana" target="_blank">
+            <Tag>Your AI Health Ally</Tag>
+          </Link>
         </motion.div>
 
         <div className="text-center">

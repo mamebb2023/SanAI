@@ -6,6 +6,7 @@ import Link from "next/link";
 import { links } from "@/constants";
 import Button from "../shared/Button";
 import { motion, AnimatePresence } from "framer-motion";
+import { HiExternalLink } from "react-icons/hi";
 
 const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -61,9 +62,15 @@ const Header = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="on-hover-underline tracking-wide hover:text-white transition-colors"
+                  className="on-hover-underline tracking-wide hover:text-white transition-colors flex-center gap-1"
+                  target={link.href.startsWith("http") ? "_blank" : undefined}
                 >
                   {link.label}
+                  {link.href.startsWith("http") && (
+                    <span className="text-lg text-gray-400 ml-1">
+                      <HiExternalLink />
+                    </span>
+                  )}
                 </Link>
               ))}
             </nav>

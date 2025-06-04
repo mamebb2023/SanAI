@@ -24,8 +24,7 @@ const Footer = () => {
     { label: "About", href: "/#about" },
     { label: "Features", href: "/#features" },
     { label: "Meet Doctor", href: "/consultation" },
-    { label: "Privacy Policy", href: "/privacy" },
-    { label: "Terms of Service", href: "/terms" },
+    { label: "Privacy & Terms", href: "/legal" },
   ];
 
   const containerVariants = {
