@@ -7,9 +7,9 @@ export default function LegalPage() {
   const [activeTab, setActiveTab] = useState<"privacy" | "terms">("privacy");
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10 text-white h-screen">
+    <div className="max-w-3xl mx-auto p-5 text-white">
       <Header />
-      <div className="flex-center">
+      <div className="h-screen flex justify-center flex-col">
         <h1 className="text-4xl font-bold mb-6 text-blue-400">
           Legal Information
         </h1>
