@@ -144,21 +144,19 @@ export default function Page() {
       <div className="relative min-h-screen flex">
         <DashboardDecore />
 
-        <div className="relative w-[60px] flex-center p-1 h-screen">
-          <div className="fixed top-1/2  left-2 -translate-y-1/2 bg-white/20 backdrop-blur-sm w-[55px] flex flex-col gap-2 items-center py-4 rounded-2xl">
-            <Logo />
-            <div className="text-xl">
-              <Link
-                href="/"
-                className="flex-center p-2 border border-transparent hover:border-white/30 rounded-xl transition-all"
-              >
-                <GoHomeFill />
-              </Link>
-            </div>
+        <div className="md:hidden flex z-20 fixed top-2 left-2 bg-white/20 backdrop-blur-sm w-[55px]  flex-col gap-2 items-center py-4 rounded-2xl">
+          <Logo />
+          <div className="text-xl">
+            <Link
+              href="/"
+              className="flex-center p-2 border border-transparent hover:border-white/30 rounded-xl transition-all"
+            >
+              <GoHomeFill />
+            </Link>
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col md:flex-row gap-2 p-2 relative">
+        <div className="flex-1 flex flex-col md:flex-row items-center md:items-stretch gap-2 p-2 relative">
           <LeftSection />
           <MiddleSection
             onConnectButtonClicked={onConnectButtonClicked}
@@ -186,6 +184,35 @@ function MiddleSection(props: {
   return (
     <div className="min-h-[80vh] relative flex-1 flex-center min-w-full md:min-w-auto">
       <ConnectButtonDecore />
+
+      <div className="hidden md:flex z-20 absolute bottom-2 bg-white/20 backdrop-blur-sm gap-2 items-center p-2 rounded-2xl">
+        <Logo />
+
+        <Link
+          href="/"
+          className="flex-center p-2 border border-transparent hover:border-white/30 rounded-xl transition-all"
+        >
+          <GoHomeFill />
+        </Link>
+
+        <AnimatePresence>
+          {agentState !== "disconnected" && (
+            <DisconnectButton>
+              <motion.div
+                key="disconnected"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                transition={{ duration: 0.6, type: "spring", stiffness: 100 }}
+                onClick={() => props.setSessionRemaining(null)}
+                className="cursor-pointer flex-center p-2 border border-red-400 bg-red-400 hover:bg-transparent hover:text-red-400 rounded-xl transition-all"
+              >
+                <IoClose />
+              </motion.div>
+            </DisconnectButton>
+          )}
+        </AnimatePresence>
+      </div>
 
       {agentState !== "disconnected" && (
         <motion.div
@@ -226,7 +253,7 @@ function MiddleSection(props: {
         )}
       </motion.div>
 
-      <div className="absolute h-48 w-[50vw] flex-center">
+      <div className="absolute h-48 w-screen flex-center">
         <BarVisualizer
           state={voiceAssistant.state}
           barCount={10}
@@ -284,7 +311,7 @@ function MiddleSection(props: {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
                 transition={{ duration: 1, type: "spring", stiffness: 100 }}
-                className="absolute left-1/2 -translate-x-1/2 bottom-0 size-14 rounded-full shadow  border border-red-400 flex-center text-3xl text-red-400 hover:text-white font-bold hover:bg-red-500 transition-all cursor-pointer"
+                className="absolute md:hidden left-1/2 -translate-x-1/2 bottom-0 size-14 rounded-full shadow  border border-red-400 flex justify-center items-center text-3xl text-red-400 hover:text-white font-bold hover:bg-red-500 transition-all cursor-pointer"
               >
                 <IoClose />
               </motion.div>
