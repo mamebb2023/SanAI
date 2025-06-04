@@ -7,6 +7,7 @@ import Link from "next/link";
 import Button from "../shared/Button";
 import HeroDecorations from "@/components/decorations/HeroDecorations";
 import HeroImageDecorations from "@/components/decorations/HeroImageDecorations";
+import { PiFlowerLotus } from "react-icons/pi";
 
 const Hero = () => {
   return (
@@ -23,9 +24,12 @@ const Hero = () => {
           <Link
             href="https://dexscreener.com/solana"
             target="_blank"
-            className=""
+            className="btn"
           >
-            <Tag>Get $San Now</Tag>
+            <div className="flex items-center gap-2 bg-white/10 rounded-full py-2 px-3">
+              <PiFlowerLotus className="text-2xl" />
+              Get $San Now
+            </div>
           </Link>
         </motion.div>
 
