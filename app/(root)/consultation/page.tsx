@@ -353,7 +353,10 @@ function RightSection(props: { room: Room }) {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file || !props.room?.localParticipant || imageUploaded) return;
-
+    if (file.size > 2 * 1024 * 1024) {
+      toast.error("Image too large. Max size is 2MB.");
+      return;
+    }
     try {
       const info = await props.room.localParticipant.sendFile(file, {
         mimeType: file.type,
@@ -362,6 +365,7 @@ function RightSection(props: { room: Room }) {
       console.log(`Sent file with stream ID: ${info.id}`);
       setImageUploaded(true);
     } catch (err) {
+      toast.error("Error uploading image. Please try again.");
       console.error("Error sending file:", err);
     } finally {
       toast.success("Image uploaded successfully!");
