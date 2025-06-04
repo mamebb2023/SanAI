@@ -12,8 +12,16 @@ import { PiFlowerLotus } from "react-icons/pi";
 const Hero = () => {
   return (
     <div className="relative flex-center pt-20 md:pt-40 px-5 md:px-20 lg:px-32">
-      <HeroDecorations />
-
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{
+          duration: 1.5,
+          delay: 0.3,
+          ease: "easeOut",
+        }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 blur-xl size-[300px] md:size-[500px] bg-gradient-to-br from-blue-500 to-cyan-500 rounded-b-full"
+      />
       {/* Main Content */}
       <div className="relative flex-1 flex-center flex-col gap-5 z-10">
         <motion.div
@@ -26,7 +34,7 @@ const Hero = () => {
             target="_blank"
             className="btn"
           >
-            <div className="flex items-center gap-2 bg-white/10 rounded-full py-2 px-3">
+            <div className="flex items-center gap-2 bg-white/30 rounded-full py-2 px-3">
               <PiFlowerLotus className="text-2xl" />
               Get $San Now
             </div>
@@ -100,7 +108,9 @@ const Hero = () => {
             background:
               "radial-gradient(circle at 50% 0%, transparent 40%, #00032b 60%)",
           }}
-        />
+        >
+          <HeroDecorations />
+        </div>
 
         <div
           className="md:hidden z-20 absolute bottom-0 w-screen h-screen"

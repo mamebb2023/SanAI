@@ -438,7 +438,7 @@ function RightSection(props: { room: Room }) {
               id="file-upload"
               ref={fileInputRef}
               type="file"
-              accept="image/jpg,image/png"
+              accept="image/*"
               className="hidden"
               disabled={
                 imageUploaded ||
