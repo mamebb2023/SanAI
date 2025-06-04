@@ -127,12 +127,10 @@
 
 .btn {
   position: relative;
-  width: 150px;
-  height: 50px;
   border: none;
   outline: none;
   z-index: 0;
-  border-radius: 12px;
+  border-radius: 999px;
 }
 
 .btn::after {
