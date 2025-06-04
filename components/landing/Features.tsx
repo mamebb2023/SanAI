@@ -90,14 +90,14 @@ const Features = () => {
         </motion.p>
       </motion.div>
 
-      <div className="relative flex justify-center gap-3 flex-wrap max-w-5xl mx-auto mt-10">
+      <div className="relative flex justify-center gap-3 flex-wrap max-w-4xl mx-auto mt-10">
         {features.map((feature, index) => (
           <motion.div
             key={index}
             initial={{ y: 10, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.6 + 0.2 * index }}
-            className="p-4 w-[40%] md:w-80 rounded-xl border flex flex-wrap gap-3 backdrop-blur-sm"
+            className="p-4 w-[40%] md:w-60 rounded-xl border flex flex-wrap gap-3 backdrop-blur-sm"
             style={{
               borderColor: `${feature.color}50`,
               background: `${feature.color}10`,

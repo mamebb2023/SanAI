@@ -141,18 +141,20 @@ export default function Page() {
 
   return (
     <RoomContext.Provider value={room}>
-      <div className="relative h-screen flex">
+      <div className="relative min-h-screen flex">
         <DashboardDecore />
 
-        <div className="bg-white/20 backdrop-blur-sm w-[60px] h-full flex flex-col gap-2 items-center py-4">
-          <Logo />
-          <div className="text-xl">
-            <Link
-              href="/"
-              className="flex-center p-2 border border-transparent hover:border-white/30 rounded-xl text-xl transition-all"
-            >
-              <GoHomeFill />
-            </Link>
+        <div className="relative w-[60px] flex-center p-1 h-screen">
+          <div className="fixed top-1/2  left-2 -translate-y-1/2 bg-white/20 backdrop-blur-sm w-[55px] flex flex-col gap-2 items-center py-4 rounded-2xl">
+            <Logo />
+            <div className="text-xl">
+              <Link
+                href="/"
+                className="flex-center p-2 border border-transparent hover:border-white/30 rounded-xl transition-all"
+              >
+                <GoHomeFill />
+              </Link>
+            </div>
           </div>
         </div>
 
@@ -224,7 +226,7 @@ function MiddleSection(props: {
         )}
       </motion.div>
 
-      <div className="absolute h-48 w-screen flex-center">
+      <div className="absolute h-48 w-[50vw] flex-center">
         <BarVisualizer
           state={voiceAssistant.state}
           barCount={10}
@@ -427,7 +429,7 @@ function RightSection(props: { room: Room }) {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className="relative flex-1 rounded-lg p-2 border border-blue-900 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 overflow-hidden"
+        className="relative min-h-[200px] flex-1 rounded-lg p-2 border border-blue-900 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 overflow-hidden"
       >
         Details:
         {roomState === ConnectionState.Connected ? (

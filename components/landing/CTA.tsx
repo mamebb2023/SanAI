@@ -17,7 +17,7 @@ const CTA = () => {
         initial={{ scale: 0.8, opacity: 0 }}
         animate={isInView ? { scale: 1, opacity: 0.1 } : {}}
         transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute size-[120vh] bg-white/80 blur-3xl rounded-full"
+        className="hidden md:block absolute size-[120vh] bg-white/80 blur-3xl rounded-full"
       />
 
       {/* Main spinning circles */}
@@ -27,9 +27,9 @@ const CTA = () => {
         className="absolute size-[100vh] flex-center"
       >
         <div className="absolute size-full rounded-full border-2 border-blue-500" />
-        <div className="absolute size-full rounded-full border-4 border-blue-500/80 blur-md" />
+        <div className="absolute size-full rounded-full border-x-4 border-blue-500/80 blur-md" />
         <div className="absolute size-[80%] rounded-full border-2 border-cyan-500" />
-        <div className="absolute size-[80%] rounded-full border-4 border-cyan-500/80 blur-md" />
+        <div className="absolute size-[80%] rounded-full border-y-4 border-cyan-500/80 blur-md" />
         <div className="absolute size-[60%] rounded-full bg-gradient-to-br from-blue-900/60 to-cyan-900/80" />
       </motion.div>
 
