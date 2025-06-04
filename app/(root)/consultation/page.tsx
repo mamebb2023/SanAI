@@ -72,7 +72,7 @@ export default function Page() {
       {
         loading: <p className="text-xs">Connecting...</p>,
         success: () => {
-          setSessionRemaining(60);
+          // setSessionRemaining(60);
           return <p className="text-xs">Connected!</p>;
         },
         error: <p className="text-xs">Error Connecting To AI.</p>,
@@ -86,28 +86,28 @@ export default function Page() {
     });
   }, [room]);
 
-  useEffect(() => {
-    if (sessionRemaining === null) return;
+  // useEffect(() => {
+  //   if (sessionRemaining === null) return;
 
-    const interval = setInterval(() => {
-      setSessionRemaining((prev) => {
-        if (prev === null) return null;
+  //   const interval = setInterval(() => {
+  //     setSessionRemaining((prev) => {
+  //       if (prev === null) return null;
 
-        const next = prev - 1;
+  //       const next = prev - 1;
 
-        if (next <= 0) {
-          toast.error("Session has ended. Disconnecting...");
-          room.disconnect();
-          clearInterval(interval);
-          return null;
-        }
+  //       if (next <= 0) {
+  //         toast.error("Session has ended. Disconnecting...");
+  //         room.disconnect();
+  //         clearInterval(interval);
+  //         return null;
+  //       }
 
-        return next;
-      });
-    }, 1000);
+  //       return next;
+  //     });
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [sessionRemaining, room]);
+  //   return () => clearInterval(interval);
+  // }, [sessionRemaining, room]);
 
   useEffect(() => {
     room.on(RoomEvent.MediaDevicesError, onDeviceFailure);
@@ -117,27 +117,27 @@ export default function Page() {
     };
   }, [room]);
 
-  useEffect(() => {
-    if (cooldownRemaining === null) return;
+  // useEffect(() => {
+  //   if (cooldownRemaining === null) return;
 
-    const interval = setInterval(() => {
-      setCooldownRemaining((prev) => {
-        if (prev === null) return null;
+  //   const interval = setInterval(() => {
+  //     setCooldownRemaining((prev) => {
+  //       if (prev === null) return null;
 
-        const next = prev - 1;
+  //       const next = prev - 1;
 
-        if (next <= 0) {
-          toast.success("You can now reconnect.");
-          clearInterval(interval);
-          return null;
-        }
+  //       if (next <= 0) {
+  //         toast.success("You can now reconnect.");
+  //         clearInterval(interval);
+  //         return null;
+  //       }
 
-        return next;
-      });
-    }, 1000);
+  //       return next;
+  //     });
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [cooldownRemaining]);
+  //   return () => clearInterval(interval);
+  // }, [cooldownRemaining]);
 
   return (
     <RoomContext.Provider value={room}>

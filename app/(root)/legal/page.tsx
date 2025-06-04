@@ -1,5 +1,6 @@
 "use client";
 
+import Header from "@/components/landing/Header";
 import React, { useState } from "react";
 
 export default function LegalPage() {
@@ -7,6 +8,7 @@ export default function LegalPage() {
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10 text-white">
+      <Header />
       <h1 className="text-4xl font-bold mb-6 text-blue-400">
         Legal Information
       </h1>

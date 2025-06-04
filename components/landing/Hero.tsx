@@ -20,8 +20,12 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <Link href="https://dexscreener.com/solana" target="_blank">
-            <Tag>Your AI Health Ally</Tag>
+          <Link
+            href="https://dexscreener.com/solana"
+            target="_blank"
+            className="btn"
+          >
+            <Tag>Get $San Now</Tag>
           </Link>
         </motion.div>
 
@@ -109,7 +113,7 @@ const Hero = () => {
           className="relative w-full max-w-5xl aspect-video my-10 md:my-16 p-8"
         >
           <HeroImageDecorations />
-          <div className="relative size-full border-x border-t border-white/50 bg-white/10 backdrop-blur-sm inset-0 bg-[url('/dashboard.png')] bg-cover bg-no-repeat object-center object-contain rounded-xl md:rounded-2xl rounded-3xl">
+          <div className="relative size-full border-x border-t border-white/50 bg-white/10 backdrop-blur-sm inset-0 bg-[url('/dashboard.png')] bg-cover bg-no-repeat object-center object-contain rounded-xl md:rounded-2xl">
             <div className="absolute -inset-2 border-8 blur-sm"></div>
           </div>
         </motion.div>
