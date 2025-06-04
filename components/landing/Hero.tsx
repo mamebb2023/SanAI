@@ -23,7 +23,7 @@ const Hero = () => {
           <Link
             href="https://dexscreener.com/solana"
             target="_blank"
-            className="btn"
+            className=""
           >
             <Tag>Get $San Now</Tag>
           </Link>

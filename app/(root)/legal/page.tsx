@@ -7,38 +7,40 @@ export default function LegalPage() {
   const [activeTab, setActiveTab] = useState<"privacy" | "terms">("privacy");
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-10 text-white">
+    <div className="max-w-3xl mx-auto px-4 py-10 text-white h-screen">
       <Header />
-      <h1 className="text-4xl font-bold mb-6 text-blue-400">
-        Legal Information
-      </h1>
+      <div className="flex-center">
+        <h1 className="text-4xl font-bold mb-6 text-blue-400">
+          Legal Information
+        </h1>
 
-      {/* Tabs */}
-      <div className="flex gap-4 mb-6 border-b border-white/20 pb-2">
-        <button
-          className={`px-4 py-2 rounded-t font-semibold transition-colors ${
-            activeTab === "privacy"
-              ? "bg-blue-500 text-white"
-              : "bg-white/10 text-gray-300 hover:bg-white/20"
-          }`}
-          onClick={() => setActiveTab("privacy")}
-        >
-          Privacy Policy
-        </button>
-        <button
-          className={`px-4 py-2 rounded-t font-semibold transition-colors ${
-            activeTab === "terms"
-              ? "bg-blue-500 text-white"
-              : "bg-white/10 text-gray-300 hover:bg-white/20"
-          }`}
-          onClick={() => setActiveTab("terms")}
-        >
-          Terms & Conditions
-        </button>
+        {/* Tabs */}
+        <div className="flex gap-4 mb-6 border-b border-white/20 pb-2 ">
+          <button
+            className={`px-4 py-2 rounded-t font-semibold transition-colors ${
+              activeTab === "privacy"
+                ? "bg-blue-500 text-white"
+                : "bg-white/10 text-gray-300 hover:bg-white/20"
+            }`}
+            onClick={() => setActiveTab("privacy")}
+          >
+            Privacy Policy
+          </button>
+          <button
+            className={`px-4 py-2 rounded-t font-semibold transition-colors ${
+              activeTab === "terms"
+                ? "bg-blue-500 text-white"
+                : "bg-white/10 text-gray-300 hover:bg-white/20"
+            }`}
+            onClick={() => setActiveTab("terms")}
+          >
+            Terms & Conditions
+          </button>
+        </div>
+
+        {/* Tab Content */}
+        {activeTab === "privacy" ? <PrivacyPolicy /> : <TermsAndConditions />}
       </div>
-
-      {/* Tab Content */}
-      {activeTab === "privacy" ? <PrivacyPolicy /> : <TermsAndConditions />}
     </div>
   );
 }

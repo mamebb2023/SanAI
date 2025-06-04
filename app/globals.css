@@ -142,7 +142,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(-45deg, #00eaff, #007bff, #1e3aff);
-  border-radius: 7px;
+  border-radius: 999px;
 }
 
 .btn::before {
@@ -151,7 +151,7 @@
   position: absolute;
   top: -2px;
   left: -2px;
-  background-size: 600%;
+  background-size: 200%;
   border-radius: 999px;
   z-index: -1;
   width: calc(100% + 5px);
