@@ -156,7 +156,7 @@ export default function Page() {
           </div>
         </div>
 
-        <div className="flex-1 flex flex-col md:flex-row items-center md:items-stretch gap-2 p-2 relative">
+        <div className="max-h-screen flex-1 flex flex-col md:flex-row items-center md:items-stretch gap-2 p-2 relative">
           <LeftSection />
           <MiddleSection
             onConnectButtonClicked={onConnectButtonClicked}
@@ -325,9 +325,9 @@ function MiddleSection(props: {
 
 function LeftSection() {
   return (
-    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 rounded-xl p-4 md:flex flex-wrap gap-2 flex-col">
-      <p>Live Chat Visualization</p>
-      <div className="flex-1 bg-white/5 rounded-md p-2 overflow-y-auto items-end backdrop-blur-sm">
+    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 rounded-xl p-4 md:flex flex-col">
+      <p className="flex-shrink-0">Live Chat Visualization</p>
+      <div className="flex-1 bg-white/5 rounded-md p-2 overflow-y-auto backdrop-blur-sm">
         <TranscriptionView />
       </div>
     </div>
