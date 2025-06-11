@@ -20,7 +20,7 @@ export const links = [
     label: "Twitter",
   },
   {
-    href: "https://dexscreener.com/solana/HoBiaRFDSPG55JUTSradG7nbkg6zWeSTnytKsezbpump",
+    href: "https://dexscreener.com/solana/",
     label: "Get $San",
   }
   // {
