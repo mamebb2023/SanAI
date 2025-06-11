@@ -16,7 +16,7 @@ const Footer = () => {
     // },
     {
       name: "X",
-      link: "https://x.com/Doctor_SanAi",
+      link: "https://x.com/",
     },
   ];
 
