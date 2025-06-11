@@ -67,7 +67,7 @@ const Header = () => {
                 >
                   {link.label}
                   {link.href.startsWith("http") && (
-                    <span className="text-lg text-gray-400 ml-1">
+                    <span className="text-lg text-cyan-200 ml-1">
                       <HiExternalLink />
                     </span>
                   )}

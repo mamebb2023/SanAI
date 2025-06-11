@@ -16,7 +16,7 @@ export const links = [
     label: "Our Mission",
   },
   {
-    href: "https://x.com/",
+    href: "https://x.com/Doctor_SanAi",
     label: "Twitter",
   },
   {
