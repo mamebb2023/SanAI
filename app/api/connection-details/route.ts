@@ -46,31 +46,31 @@ export async function GET(request: Request) {
       throw new Error("LiveKit credentials are missing");
     }
 
-//     await dbConnect();
+    await dbConnect();
 
-//     const ip = getClientIP(request.headers);
-//     const now = Date.now();
+    const ip = getClientIP(request.headers);
+    const now = Date.now();
 
-//     const existing = await User.findOne({ ip });
+    const existing = await User.findOne({ ip });
 
-//     if (existing) {
-//       const elapsed = now - existing.lastConnectedAt;
-//       const cooldown = 1 * 60_000 + 25 * 60_000; // 32 minutes
+    if (existing) {
+      const elapsed = now - existing.lastConnectedAt;
+      const cooldown = 1 * 60_000 + 25 * 60_000; // 32 minutes
 
-//       if (elapsed < cooldown) {
-//   const remaining = cooldown - elapsed;
+      if (elapsed < cooldown) {
+  const remaining = cooldown - elapsed;
 
-//   return NextResponse.json(
-//     { message: "TimeOut: Please wait before reconnecting.", remaining },
-//     { status: 403, headers: { "Cache-Control": "no-store" } }
-//   );
-// }
+  return NextResponse.json(
+    { message: "TimeOut: Please wait before reconnecting.", remaining },
+    { status: 403, headers: { "Cache-Control": "no-store" } }
+  );
+}
 
-//       existing.lastConnectedAt = now;
-//       await existing.save();
-//     } else {
-//       await User.create({ ip, lastConnectedAt: now });
-//     }
+      existing.lastConnectedAt = now;
+      await existing.save();
+    } else {
+      await User.create({ ip, lastConnectedAt: now });
+    }
 
     const participantIdentity = `patient_identity_${Math.floor(Math.random() * 10_000)}`;
     const roomName = `patient_room_${Math.floor(Math.random() * 10_000)}`;
