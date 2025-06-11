@@ -30,7 +30,7 @@ const Hero = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <Link
-            href="https://dexscreener.com/solana"
+            href="https://dexscreener.com/solana/HoBiaRFDSPG55JUTSradG7nbkg6zWeSTnytKsezbpump"
             target="_blank"
             className="btn"
           >
