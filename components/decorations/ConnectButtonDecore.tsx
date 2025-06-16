@@ -15,7 +15,7 @@ const ConnectButtonDecore = () => {
           type: "spring",
           delay: 0.4,
         }}
-        className="absolute size-80 rounded-full border border-blue-500"
+        className="absolute size-80 rounded-full border border-emerald-500"
       />
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -26,7 +26,7 @@ const ConnectButtonDecore = () => {
           type: "spring",
           delay: 0.4,
         }}
-        className="absolute size-80 rounded-full border-x-6 border-blue-500 blur-sm slow-spin"
+        className="absolute size-80 rounded-full border-x-6 border-emerald-500 blur-sm slow-spin"
       />
 
       <motion.div
@@ -38,7 +38,7 @@ const ConnectButtonDecore = () => {
           type: "spring",
           delay: 0.2,
         }}
-        className="absolute size-60 rounded-full border border-cyan-500"
+        className="absolute size-60 rounded-full border border-lime-500"
       />
       <motion.div
         initial={{ scale: 0.8, opacity: 0 }}
@@ -49,7 +49,7 @@ const ConnectButtonDecore = () => {
           type: "spring",
           delay: 0.2,
         }}
-        className="absolute size-60 rounded-full border-x-6 border-cyan-500 blur-sm slow-spin"
+        className="absolute size-60 rounded-full border-x-6 border-lime-500 blur-sm slow-spin"
         style={{ animationDirection: "reverse" }}
       />
     </>

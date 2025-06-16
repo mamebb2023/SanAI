@@ -10,14 +10,14 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
   const socials = [
-    // {
-    //   name: "GitHub",
-    //   link: "https://github.com/mamebb2023/sanai",
-    // },
     {
-      name: "X",
-      link: "https://x.com/Doctor_SanAi",
+      name: "GitHub",
+      link: "https://github.com/mamebb2023/sanai",
     },
+    // {
+    //   name: "X",
+    //   link: "https://x.com/Doctor_SanAi",
+    // },
   ];
 
   const quickLinks = [
@@ -53,7 +53,7 @@ const Footer = () => {
       <div className="absolute right-0 h-full flex items-center">
         <PiFlowerLotus className="text-[500px] text-white/10" />
       </div>
-      <div className="absolute w-full left-1/2 -translate-x-1/2 -bottom-1/2 -translate-y-5 lg:-translate-y-1/4 h-60 bg-gradient-to-r from-blue-500 via-blue-500 to-cyan-500 blur-3xl rounded-[50%]" />
+      <div className="absolute w-full left-1/2 -translate-x-1/2 -bottom-1/2 -translate-y-5 lg:-translate-y-1/4 h-60 bg-gradient-to-r from-emerald-500 via-emerald-500 to-lime-500 blur-3xl rounded-[50%]" />
 
       <motion.div
         initial="hidden"
@@ -71,7 +71,7 @@ const Footer = () => {
             <Logo containerClass="size-12 text-3xl" />
             <span className="text-2xl font-medium">SanAI</span>
           </div>
-          <p className="text-sm text-gray-400">
+          <p className="text-sm text-gray-900">
             Your intelligent medical companion. SanAI combines cutting-edge AI
             with compassionate healthcare guidance to support your wellness
             journey.
@@ -82,10 +82,10 @@ const Footer = () => {
                 <Link
                   href={link.link}
                   target="_blank"
-                  className="relative size-10 flex-center text-xl border-t border-l border-white/30 rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300"
+                  className="relative size-10 flex-center text-xl border-t border-l border-black/80 rounded-xl overflow-hidden hover:bg-black/10 transition-all duration-300"
                 >
-                  <div className="absolute top-0 left-0 blur-md size-5 bg-cyan-300 rounded-full" />
-                  <div className="absolute right-0 bottom-0 blur-md size-5 bg-blue-500 rounded-full" />
+                  <div className="absolute top-0 left-0 blur-md size-5 bg-lime-500 rounded-full" />
+                  <div className="absolute right-0 bottom-0 blur-md size-5 bg-emerald-500 rounded-full" />
                   {getSocialIcon(link.name)}
                 </Link>
               </motion.div>
@@ -112,7 +112,7 @@ const Footer = () => {
               <motion.div key={index} variants={itemVariants}>
                 <Link
                   href={link.href}
-                  className="text-sm text-gray-400 hover:text-white transition-all duration-300 hover:pl-2"
+                  className="text-sm text-gray-700 hover:text-black transition-all duration-300 hover:pl-2"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -134,19 +134,19 @@ const Footer = () => {
           >
             <span className="gradient-underline">Stay Updated</span>
           </motion.h3>
-          <motion.p variants={itemVariants} className="text-sm text-gray-400">
+          <motion.p variants={itemVariants} className="text-sm text-gray-700">
             Subscribe to our newsletter for health tips and updates.
           </motion.p>
           <motion.form variants={itemVariants} className="flex gap-2 mt-2">
             <input
               type="email"
               placeholder="Your email"
-              className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 w-full cursor-not-allowed"
+              className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full cursor-not-allowed"
               disabled={true}
             />
             <button
               type="submit"
-              className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity cursor-not-allowed"
+              className="bg-gradient-to-r from-emerald-500 to-lime-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition-opacity cursor-not-allowed"
               disabled={true}
             >
               Subscribe

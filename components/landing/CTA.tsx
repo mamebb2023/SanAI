@@ -26,11 +26,11 @@ const CTA = () => {
         animate={{ scale: isInView ? 1 : 0 }}
         className="absolute size-[100vh] flex-center"
       >
-        <div className="absolute size-full rounded-full border-2 border-blue-500" />
-        <div className="absolute size-full rounded-full border-x-4 border-blue-500/80 blur-md" />
-        <div className="absolute size-[80%] rounded-full border-2 border-cyan-500" />
-        <div className="absolute size-[80%] rounded-full border-y-4 border-cyan-500/80 blur-md" />
-        <div className="absolute size-[60%] rounded-full bg-gradient-to-br from-blue-900/60 to-cyan-900/80" />
+        <div className="absolute size-full rounded-full border-2 border-lime-500" />
+        <div className="absolute size-full rounded-full border-x-4 border-lime-500 blur-md" />
+        <div className="absolute size-[80%] rounded-full border-2 border-emerald-500" />
+        <div className="absolute size-[80%] rounded-full border-y-4 border-emerald-500 blur-md" />
+        <div className="absolute size-[60%] rounded-full bg-gradient-to-br from-lime-200 to-emerald-200" />
       </motion.div>
 
       {/* Content */}
@@ -40,14 +40,14 @@ const CTA = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <PiFlowerLotus className="mx-auto text-6xl text-cyan-400/80" />
+          <PiFlowerLotus className="mx-auto text-6xl text-emerald-400/80" />
         </motion.div>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-cyan-300"
+          className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-emerald-500 to-lime-500"
         >
           Ready to Transform Your Health?
         </motion.h1>
@@ -56,7 +56,7 @@ const CTA = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="text-lg md:text-xl text-cyan-100/80 max-w-2xl"
+          className="text-lg md:text-xl text-emerald-900/80 max-w-2xl"
         >
           Join SanAI today and take the first step towards a healthier, more
           informed you.

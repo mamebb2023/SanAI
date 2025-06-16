@@ -1,4 +1,8 @@
-import { AccessToken, AccessTokenOptions, VideoGrant } from "livekit-server-sdk";
+import {
+  AccessToken,
+  AccessTokenOptions,
+  VideoGrant,
+} from "livekit-server-sdk";
 import { NextResponse } from "next/server";
 import { dbConnect } from "@/lib/dbConnect";
 import { User } from "@/models/user.model";
@@ -22,7 +26,10 @@ function getClientIP(headers: Headers): string {
   return forwarded ? forwarded.split(",")[0].trim() : "unknown_ip";
 }
 
-function createParticipantToken(userInfo: AccessTokenOptions, roomName: string) {
+function createParticipantToken(
+  userInfo: AccessTokenOptions,
+  roomName: string
+) {
   const at = new AccessToken(API_KEY!, API_SECRET!, {
     ...userInfo,
     ttl: "15m",
@@ -55,16 +62,16 @@ export async function GET(request: Request) {
 
     if (existing) {
       const elapsed = now - existing.lastConnectedAt;
-      const cooldown = 1 * 60_000 + 25 * 60_000; // 32 minutes
+      const cooldown = 1 * 60_000 + 10 * 60_000;  //  1 minute + 25 minutes
 
       if (elapsed < cooldown) {
-  const remaining = cooldown - elapsed;
+        const remaining = cooldown - elapsed;
 
-  return NextResponse.json(
-    { message: "TimeOut: Please wait before reconnecting.", remaining },
-    { status: 403, headers: { "Cache-Control": "no-store" } }
-  );
-}
+        return NextResponse.json(
+          { message: "TimeOut: Please wait before reconnecting.", remaining },
+          { status: 403, headers: { "Cache-Control": "no-store" } }
+        );
+      }
 
       existing.lastConnectedAt = now;
       await existing.save();
@@ -72,9 +79,14 @@ export async function GET(request: Request) {
       await User.create({ ip, lastConnectedAt: now });
     }
 
-    const participantIdentity = `patient_identity_${Math.floor(Math.random() * 10_000)}`;
+    const participantIdentity = `patient_identity_${Math.floor(
+      Math.random() * 10_000
+    )}`;
     const roomName = `patient_room_${Math.floor(Math.random() * 10_000)}`;
-    const participantToken = await createParticipantToken({ identity: participantIdentity }, roomName);
+    const participantToken = await createParticipantToken(
+      { identity: participantIdentity },
+      roomName
+    );
 
     const data: ConnectionDetails = {
       serverUrl: LIVEKIT_URL,
@@ -83,8 +95,9 @@ export async function GET(request: Request) {
       participantName: participantIdentity,
     };
 
-    return NextResponse.json(data, { headers: { "Cache-Control": "no-store" } });
-
+    return NextResponse.json(data, {
+      headers: { "Cache-Control": "no-store" },
+    });
   } catch (error) {
     console.error(error);
     return new NextResponse("Internal Server Error", {

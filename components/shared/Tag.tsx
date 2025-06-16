@@ -32,7 +32,7 @@ const Tag = ({
 
         {/* Core tag content */}
         <div
-          className={`relative flex-center px-4 py-2 bg-blue-400/30 backdrop-blur-sm rounded-xl border-x border-t overflow-hidden ${
+          className={`relative flex-center px-4 py-2 bg-emerald-400/30 backdrop-blur-sm rounded-xl border-x border-t overflow-hidden ${
             decore ? "border-white/50" : "border-white/30"
           }`}
         >
@@ -41,15 +41,15 @@ const Tag = ({
             className={`absolute top-0 -translate-y-3/4 size-[50px] bg-white rounded-full blur-[35px]`}
           />
           <div
-            className={`absolute right-0 size-[50px] bg-cyan-500 rounded-full blur-[35px]`}
+            className={`absolute right-0 size-[50px] bg-lime-500 rounded-full blur-[35px]`}
           />
           <div
-            className={`absolute left-0 size-[50px] bg-blue-500 rounded-full blur-[35px]`}
+            className={`absolute left-0 size-[50px] bg-emerald-500 rounded-full blur-[35px]`}
           />
 
           {/* Tag icon + content */}
           <div className="relative flex-center gap-3">
-            <PiFlowerLotusBold className="text-xl text-blue-100" />
+            <PiFlowerLotusBold className="text-2xl text-emerald-900" />
             {children}
           </div>
         </div>

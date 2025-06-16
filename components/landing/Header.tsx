@@ -51,7 +51,7 @@ const Header = () => {
           exit={{ y: "-100%", opacity: 0 }}
           className={`fixed top-2 left-0 z-50 w-screen flex-center px-5 md:px-10 lg:px-20`}
         >
-          <div className="flex-between flex-1 w-full backdrop-blur-sm mx-auto bg-white/10 border border-white/20 rounded-full py-1 px-4 sm:px-8 md:px-20">
+          <div className="flex-between flex-1 w-full backdrop-blur-[2px] mx-auto bg-white/10 border border-white/20 rounded-full py-1 px-4 sm:px-8 md:px-20">
             <Link href="/" className="flex items-center gap-2">
               <Logo />
               <span className="font-bold">SanAI</span>
@@ -62,12 +62,12 @@ const Header = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="on-hover-underline tracking-wide hover:text-white transition-colors flex-center gap-1"
+                  className="on-hover-underline tracking-wide hover:text-gray-800 transition-colors flex-center gap-1"
                   target={link.href.startsWith("http") ? "_blank" : undefined}
                 >
                   {link.label}
                   {link.href.startsWith("http") && (
-                    <span className="text-lg text-cyan-200 ml-1">
+                    <span className="text-lg text-emerald-200 ml-1">
                       <HiExternalLink />
                     </span>
                   )}
@@ -76,7 +76,7 @@ const Header = () => {
             </nav>
 
             <Link href="/consultation?utm_source=header">
-              <Button className="scale-90 hover:scale-95">Try Now</Button>
+              <Button className="scale-90">Try Now</Button>
             </Link>
           </div>
         </motion.div>

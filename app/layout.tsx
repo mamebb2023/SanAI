@@ -74,7 +74,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${font.className} bg-[#00032b] text-white antialiased overflow-x-hidden`}
+        className={`${font.className} bg-[#eafff3] antialiased overflow-x-hidden`}
       >
         <ReactLenis root>
           {children}

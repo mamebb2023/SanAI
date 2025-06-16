@@ -3,6 +3,7 @@ import * as React from "react";
 import { FaInfoCircle, FaRegUser } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Logo from "./shared/Logo";
 
 export default function TranscriptionView() {
   const combinedTranscriptions = useCombinedTranscriptions();
@@ -14,7 +15,7 @@ export default function TranscriptionView() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="flex-center flex-col gap-2 h-full text-gray-500"
+        className="flex-center flex-col gap-2 h-full text-emerald-700/80"
       >
         <FaInfoCircle />
         <p className="max-w-[150px] text-center">
@@ -41,27 +42,19 @@ export default function TranscriptionView() {
             }`}
           >
             {segment.role === "assistant" && (
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 text-lg flex-center">
-                <Image
-                  src="/logo.png"
-                  alt="Assistant Avatar"
-                  width={32}
-                  height={32}
-                  className="w-8 h-8 rounded-full"
-                />
-              </div>
+              <Logo containerClass="flex-shrink-0" />
             )}
             <div
               className={
                 segment.role === "assistant"
-                  ? "p-2 self-start fit-content border rounded-e-2xl rounded-t-2xl border-white bg-white/10"
-                  : "border rounded-s-2xl rounded-t-2xl border-cyan-500 bg-cyan-500/20 rounded-md p-2 self-end fit-content"
+                  ? "p-2 self-start fit-content border rounded-e-2xl rounded-t-2xl border-emerald-500 bg-white/10"
+                  : "border rounded-s-2xl rounded-t-2xl border-emerald-500 text-emerald-950 bg-emerald-500/20 rounded-md p-2 self-end fit-content"
               }
             >
               {segment.text}
             </div>
             {segment.role !== "assistant" && (
-              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-white/20 border text-lg flex-center">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-500/20 border border-emerald-900 text-emerald-900 text-lg flex-center">
                 <FaRegUser />
               </div>
             )}

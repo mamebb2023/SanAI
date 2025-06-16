@@ -72,7 +72,7 @@ export default function Page() {
       {
         loading: <p className="text-xs">Connecting...</p>,
         success: () => {
-          setSessionRemaining(90);
+          setSessionRemaining(5 * 60);
           return <p className="text-xs">Connected!</p>;
         },
         error: <p className="text-xs">Error Connecting To AI.</p>,
@@ -185,12 +185,16 @@ function MiddleSection(props: {
     <div className="min-h-[80vh] relative flex-1 flex-center min-w-full md:min-w-auto">
       <ConnectButtonDecore />
 
-      <div className="hidden md:flex z-20 absolute bottom-2 bg-white/20 backdrop-blur-sm gap-2 items-center p-2 rounded-2xl">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="hidden md:flex z-20 absolute bottom-2 bg-emerald-500/10 border border-emerald-500 backdrop-blur-[1px] gap-2 items-center p-2 rounded-2xl"
+      >
         <Logo />
 
         <Link
           href="/"
-          className="flex-center p-2 border border-transparent hover:border-white/30 rounded-xl transition-all"
+          className="flex-center p-2 border border-transparent hover:border-black/70 rounded-xl transition-all"
         >
           <GoHomeFill />
         </Link>
@@ -212,7 +216,7 @@ function MiddleSection(props: {
             </DisconnectButton>
           )}
         </AnimatePresence>
-      </div>
+      </motion.div>
 
       {agentState !== "disconnected" && (
         <motion.div
@@ -261,7 +265,7 @@ function MiddleSection(props: {
           options={{ minHeight: 30, maxHeight: 80 }}
           className="h-full w-full flex-center flex-wrap gap-1"
         >
-          <div className="size-10 rounded-full bg-white/10" />
+          <div className="size-10 rounded-full bg-emerald-500/10" />
         </BarVisualizer>
       </div>
 
@@ -274,7 +278,7 @@ function MiddleSection(props: {
         transition={{ duration: 1, type: "spring", stiffness: 100 }}
       >
         <button
-          className={`relative flex-center size-32 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full transition-all ${
+          className={`relative flex-center size-32 bg-gradient-to-br from-emerald-500 to-lime-500 rounded-full transition-all ${
             agentState === "disconnected"
               ? "cursor-pointer hover:scale-105 active:scale-95"
               : "cursor-not-allowed"
@@ -311,7 +315,7 @@ function MiddleSection(props: {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0 }}
                 transition={{ duration: 1, type: "spring", stiffness: 100 }}
-                className="absolute md:hidden left-1/2 -translate-x-1/2 bottom-0 size-14 rounded-full shadow  border border-red-400 flex justify-center items-center text-3xl text-red-400 hover:text-white font-bold hover:bg-red-500 transition-all cursor-pointer"
+                className="absolute md:hidden left-1/2 -translate-x-1/2 bottom-0 size-14 rounded-full shadow  border border-red-500 flex justify-center items-center text-3xl text-red-500 hover:text-white font-bold hover:bg-red-600 transition-all cursor-pointer"
               >
                 <IoClose />
               </motion.div>
@@ -325,9 +329,9 @@ function MiddleSection(props: {
 
 function LeftSection() {
   return (
-    <div className="hidden relative w-[90%] md:w-[27%] bg-white/10 rounded-xl p-4 md:flex flex-col">
+    <div className="hidden relative w-[90%] md:w-[27%] backdrop-blur-[1px] border border-emerald-500 rounded-xl p-4 md:flex flex-col">
       <p className="flex-shrink-0">Live Chat Visualization</p>
-      <div className="flex-1 bg-white/5 rounded-md p-2 overflow-y-auto backdrop-blur-sm">
+      <div className="flex-1 bg-emerald-500/5 rounded-xl p-2 overflow-y-auto backdrop-blur-[3px]">
         <TranscriptionView />
       </div>
     </div>
@@ -373,14 +377,14 @@ function RightSection(props: { room: Room }) {
   };
 
   return (
-    <div className="relative w-[90%] md:w-[27%] bg-white/10 backdrop-blur-sm rounded-xl p-4 flex flex-col gap-2">
+    <div className="relative w-[90%] md:w-[27%] bg-lime-300/10 backdrop-blur-[2px] rounded-xl p-4 flex flex-col gap-2">
       {/* sound track */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className="relative h-[200px] rounded-lg border border-white/50 overflow-hidden"
+        className="relative h-[200px] rounded-lg bg-lime-500/20 overflow-hidden"
       >
         {localMicTrack ? (
           <ConfigurationPanelItem
@@ -392,16 +396,16 @@ function RightSection(props: { room: Room }) {
             >
               <BarVisualizer
                 trackRef={localMicTrack}
-                className="size-full flex-center gap-1"
+                className="translate-y-3 size-full flex-center gap-1"
                 barCount={20}
                 options={{ minHeight: 0 }}
               >
-                <div className="size-1 rounded-full bg-white/50" />
+                <div className="size-1 rounded-full bg-emerald-800/50" />
               </BarVisualizer>
             </div>
           </ConfigurationPanelItem>
         ) : (
-          <div className="size-full bg-white/10 flex-center flex-col text-white/50">
+          <div className="size-full bg-white/10 flex-center flex-col text-emerald-800/50">
             <RiVoiceprintLine className="text-4xl" />
           </div>
         )}
@@ -412,7 +416,7 @@ function RightSection(props: { room: Room }) {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className={`relative h-[150px] rounded-lg border-2 border-dashed border-white/50 transition-colors duration-200 overflow-hidden flex flex-col items-center justify-center bg-white/10 text-white p-4 ${
+        className={`relative h-[150px] rounded-lg border-2 border-dashed border-emerald-600/50 transition-colors duration-200 overflow-hidden flex flex-col items-center justify-center bg-white/10 text-emerald-800 p-4 ${
           imageUploaded ||
           props.room.state === "disconnected" ||
           props.room.state === "connecting"
@@ -428,14 +432,14 @@ function RightSection(props: { room: Room }) {
               props.room.state === "disconnected" ||
               props.room.state === "connecting"
                 ? "opacity-50 cursor-not-allowed"
-                : "cursor-pointer hover:bg-white/20 hover:text-white"
+                : "cursor-pointer hover:bg-emerald-950/20 hover:text-emerald-950"
             }  flex flex-col items-center justify-center p-4 rounded-lg transition-all duration-200 group`}
           >
-            <FiUploadCloud className="text-3xl text-gray-400 group-hover:text-white transition-colors duration-200 mb-2" />
-            <span className="font-semibold text-gray-300 group-hover:text-white transition-colors duration-200">
+            <FiUploadCloud className="text-3xl text-emerald-600 group-hover:text-emerald-950 transition-colors duration-200 mb-2" />
+            <span className="font-semibold text-emerald-700 group-hover:text-emerald-950 transition-colors duration-200">
               Upload an Image for Dr. San to Analyze
             </span>
-            <span className="text-sm text-gray-500 group-hover:text-gray-300 transition-colors duration-200 mt-1">
+            <span className="text-sm text-emerald-500 group-hover:text-emerald-700 transition-colors duration-200 mt-1">
               (PNG, JPG up to 2MB)
             </span>
             <input
@@ -460,7 +464,7 @@ function RightSection(props: { room: Room }) {
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.8 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className="relative min-h-[200px] flex-1 rounded-lg p-2 border border-blue-900 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 overflow-hidden"
+        className="relative min-h-[200px] flex-1 rounded-lg p-2 border border-lime-900 bg-gradient-to-br from-lime-500/10 to-emerald-500/10 overflow-hidden"
       >
         Details:
         {roomState === ConnectionState.Connected ? (
@@ -518,7 +522,7 @@ function Tip() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5, delay: 1, type: "spring", stiffness: 100 }}
-        className="flex items-center gap-1 text-sm text-white/50"
+        className="flex items-center gap-1 text-sm text-emerald-800/50"
       >
         <span>
           <FaInfoCircle />

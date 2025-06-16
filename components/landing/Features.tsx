@@ -77,14 +77,14 @@ const Features = () => {
         transition={{ duration: 0.8, delay: 0.2 }}
         className="text-center max-w-4xl mx-auto mt-6"
       >
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-cyan-200 leading-tight">
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-black to-lime-700 leading-tight">
           Your AI Health Companion
         </h2>
         <motion.p
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 0.8 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="md:text-xl text-cyan-100 mt-6"
+          className="md:text-xl text-emerald-800 mt-6"
         >
           SanAI combines cutting-edge technology with personalized care
         </motion.p>
@@ -113,7 +113,9 @@ const Features = () => {
               {feature.title}
             </div>
 
-            <span className="text-xs text-gray-400">{feature.description}</span>
+            <span className="text-xs text-emerald-950">
+              {feature.description}
+            </span>
           </motion.div>
         ))}
       </div>
