@@ -16,11 +16,11 @@ export const links = [
     label: "Our Mission",
   },
   {
-    href: "https://x.com/Doctor_SanAi",
+    href: "https://x.com/",
     label: "Twitter",
   },
   {
-    href: "https://dexscreener.com/solana/HoBiaRFDSPG55JUTSradG7nbkg6zWeSTnytKsezbpump",
+    href: "https://dexscreener.com/solana/",
     label: "Get $San",
   }
   // {
