@@ -7,20 +7,20 @@ export default function LegalPage() {
   const [activeTab, setActiveTab] = useState<"privacy" | "terms">("privacy");
 
   return (
-    <div className="max-w-3xl mx-auto p-5 text-white">
+    <div className="max-w-3xl mx-auto p-5">
       <Header />
       <div className="h-screen flex justify-center flex-col">
-        <h1 className="text-4xl font-bold mb-6 text-blue-400">
+        <h1 className="text-4xl font-bold mb-6 text-emerald-400">
           Legal Information
         </h1>
 
         {/* Tabs */}
-        <div className="flex gap-4 mb-6 border-b border-white/20 pb-2 ">
+        <div className="flex gap-4 mb-6 border-b border-black/20 pb-2 ">
           <button
             className={`px-4 py-2 rounded-t font-semibold transition-colors ${
               activeTab === "privacy"
-                ? "bg-blue-500 text-white"
-                : "bg-white/10 text-gray-300 hover:bg-white/20"
+                ? "bg-emerald-500 text-black"
+                : "bg-black/10 text-gray-700 hover:bg-black/20"
             }`}
             onClick={() => setActiveTab("privacy")}
           >
@@ -29,8 +29,8 @@ export default function LegalPage() {
           <button
             className={`px-4 py-2 rounded-t font-semibold transition-colors ${
               activeTab === "terms"
-                ? "bg-blue-500 text-white"
-                : "bg-white/10 text-gray-300 hover:bg-white/20"
+                ? "bg-emerald-500 text-black"
+                : "bg-black/10 text-gray-700 hover:bg-black/20"
             }`}
             onClick={() => setActiveTab("terms")}
           >
@@ -48,7 +48,7 @@ export default function LegalPage() {
 function PrivacyPolicy() {
   return (
     <section>
-      <h2 className="text-2xl font-semibold mb-4 text-blue-300">
+      <h2 className="text-2xl font-semibold mb-4 text-emerald-700">
         Privacy Policy
       </h2>
       <p className="mb-4">
@@ -56,7 +56,7 @@ function PrivacyPolicy() {
         data necessary to provide a secure and personalized healthcare
         experience.
       </p>
-      <ul className="list-disc list-inside space-y-2 text-gray-300">
+      <ul className="list-disc list-inside space-y-2 text-gray-700">
         <li>We do not sell or share your personal data with third parties.</li>
         <li>
           Data such as voice recordings or image uploads may be temporarily
@@ -78,13 +78,13 @@ function PrivacyPolicy() {
 function TermsAndConditions() {
   return (
     <section>
-      <h2 className="text-2xl font-semibold mb-4 text-blue-300">
+      <h2 className="text-2xl font-semibold mb-4 text-emerald-700">
         Terms & Conditions
       </h2>
       <p className="mb-4">
         By using Dr. San, you agree to the following terms:
       </p>
-      <ul className="list-disc list-inside space-y-2 text-gray-300">
+      <ul className="list-disc list-inside space-y-2 text-gray-700">
         <li>This service is intended for informational purposes only.</li>
         <li>
           Dr. San is not a licensed medical practitioner. Always consult a
