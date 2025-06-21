@@ -22,7 +22,7 @@ export const links = [
   // {
   //   href: "https://dexscreener.com/solana/",
   //   label: "Get $San",
-  }
+  // }
   // {
   //   href: "/#faq",
   //   label: "FAQ"
